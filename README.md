@@ -47,9 +47,9 @@ Two short films from the founder — playable right here on GitHub. Use the cont
 
 **Shadow-Mode Pilot Partner (English)**
 
-![](helix-solutions/assets/Shadow-Mode_Pilot_Partner.mp4)
+<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/shadow-preview.mp4" controls width="640"></video>
 
-[Download / open the English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4)
+[Download / open the English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/shadow-preview.mp4)
 
 **الذكاء الاصطناعي المنضبط (Arabic)**
 
