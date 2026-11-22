@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/helix-solutions-logo-512.png" alt="Helix Solutions" width="160" height="160">
+  <img src="assets/helix-solutions-logo.png" alt="Helix Solutions" width="160" height="160">
 </div>
 
 <h1 align="center">Helix Solutions</h1>
@@ -94,7 +94,7 @@ The README snapshots of every repository are rendered to PDF and kept in sync in
 
 ## Brand
 
-One canonical mark — [`assets/helix-solutions-logo-512.png`](assets/helix-solutions-logo-512.png) (SVG source: [`assets/helix-solutions-logo.svg`](assets/helix-solutions-logo.svg)) — is used across every project, product, README and page on the account. The same asset is distributed to each project root so the brand stays consistent offline.
+One canonical mark — [`assets/helix-solutions-logo.png`](assets/helix-solutions-logo.png) (SVG source: [`assets/helix-solutions-logo.svg`](assets/helix-solutions-logo.svg)) — is used across every project, product, README and page on the account. The same asset is distributed to each project root so the brand stays consistent offline.
 
 ---
 
