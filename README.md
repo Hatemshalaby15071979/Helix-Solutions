@@ -41,6 +41,26 @@ No dependencies. `node_modules/` (Puppeteer, used only for offline screenshot to
 
 ---
 
+## Films
+
+Two short films from the founder — playable right here on GitHub. Use the controls to play, pause and seek. If your browser or network blocks inline playback, use the direct links below each player.
+
+**Shadow-Mode Pilot Partner (English)**
+
+<video src="https://hatemshalaby15071979.github.io/Helix-Solutions/helix-solutions/assets/Shadow-Mode_Pilot_Partner.mp4" poster="https://hatemshalaby15071979.github.io/Helix-Solutions/helix-solutions/assets/poster-shadow.png" controls preload="metadata" width="640" style="max-width:100%;height:auto"></video>
+
+[Download / open the English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/raw/main/helix-solutions/assets/Shadow-Mode_Pilot_Partner.mp4)
+
+**الذكاء الاصطناعي المنضبط (Arabic)**
+
+<video src="https://hatemshalaby15071979.github.io/Helix-Solutions/helix-solutions/assets/%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1_%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A_%D8%A7%D9%84%D9%85%D9%86%D8%B6%D8%A8%D8%B7.mp4" poster="https://hatemshalaby15071979.github.io/Helix-Solutions/helix-solutions/assets/poster-arabic.png" controls preload="metadata" width="640" style="max-width:100%;height:auto" lang="ar" dir="rtl"></video>
+
+[Download / open the Arabic film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/raw/main/helix-solutions/assets/%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1_%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A_%D8%A7%D9%84%D9%85%D9%86%D8%B6%D8%A8%D8%B7.mp4)
+
+> Notes: the players stream from the site's GitHub Pages URLs (served as `video/mp4` with byte-range support). The same files are committed in [`helix-solutions/assets/`](helix-solutions/assets/) and are also what the [company site](helix-solutions/index.html) uses.
+
+---
+
 ## The portfolio
 
 Everything is connected and synchronised under one canonical Helix Solutions mark. Thirteen public product repositories, plus this company site.
