@@ -1,0 +1,2902 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="carbon">
+  <title>Hatem Shalaby — Operations &amp; AI Portfolio Reference Matrix</title>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100..700;1,100..700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+  <link rel="stylesheet" href="cockpit/day-os.css">
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #ffffff;
+      --surface-container-low: #f4f4f4;
+      --surface-container: #f4f4f4;
+      --surface-container-high: #e0e0e0;
+
+      /* Ink */
+      --on-surface: #161616;
+      --on-surface-variant: #525252;
+
+      /* Rules */
+      --outline: #8d8d8d;
+      --outline-variant: #e0e0e0;
+
+      /* Accents */
+      --primary: #0f62fe;
+      --on-primary: #ffffff;
+      --primary-container: #d0e2ff;
+      --on-primary-container: #161616;
+      --primary-hover: #0353e9;
+      --secondary: #6f6f6f;
+      --tertiary: #198038;
+      --error: #da1e28;
+      --on-error: #ffffff;
+
+      /* Semantic tokens */
+      --positive: #198038;
+      --warning: #b28600;
+      --warning-container: #fcf4d6;
+      --positive-container: #defbe6;
+      --error-container: #fff1f1;
+      --focus: #0f62fe;
+
+      /* Data series */
+      --data-1: #0f62fe;
+      --data-2: #6929c4;
+      --data-3: #005d5d;
+      --data-4: #9f1853;
+      --data-context: #8d8d8d;
+
+      /* Fonts */
+      --font-headline: 'IBM Plex Sans', sans-serif;
+      --font-body: 'IBM Plex Sans', sans-serif;
+      --font-label: 'IBM Plex Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.125rem;
+      --rounded-lg: 0.25rem;
+      --rounded-full: 0.75rem;
+
+      /* Style effects */
+      --shadow-1: 0 2px 6px rgb(0 0 0 / 0.1);
+      --shadow-2: 0 4px 12px rgb(0 0 0 / 0.12);
+      --rule: 1px solid var(--outline-variant);
+      --field-rule: 1px solid var(--outline);
+      --indicator: 2px solid var(--primary);
+      --boundary-bar: 3px solid var(--warning);
+      --error-bar: 3px solid var(--error);
+      --positive-bar: 3px solid var(--positive);
+      --primary-bar: 3px solid var(--primary);
+
+      /* Type scale (Dashboard / Data Explorer) */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale (4pt base) */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    /* Base reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    header { position: static !important; }
+
+    button, input, select, textarea {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .page-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-xl);
+      padding: var(--space-lg) var(--space-lg) var(--space-2xl);
+      max-width: 1280px;
+      margin: 0 auto;
+      overflow: hidden;
+    }
+    .page-grid * { min-width: 0; }
+
+    /* Typography */
+    .mono-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--on-surface-variant);
+      display: block;
+    }
+
+    .headline {
+      font-family: var(--font-headline);
+      font-weight: 300;
+      font-size: var(--display-size);
+      line-height: 1.18;
+      letter-spacing: 0;
+      margin: var(--space-xs) 0 var(--space-sm);
+      color: var(--on-surface);
+    }
+    .headline strong {
+      font-weight: 600;
+    }
+
+    .section-heading {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--headline-size);
+      line-height: 1.25;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    .subhead {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-size: var(--subhead-size);
+      line-height: 1.3;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    .lede {
+      max-width: 72ch;
+      color: var(--on-surface-variant);
+      margin: 0 0 var(--space-md);
+    }
+
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: var(--space-md);
+      border-bottom: var(--rule);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    /* Helix Solutions master brand — shared across every README and HTML */
+    .hs-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: .55rem;
+      align-self: flex-start;
+      color: var(--on-surface);
+      font: 600 .78rem/1 var(--font-mono, ui-monospace, monospace);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+    .hs-brand img { display: block; }
+    .hs-brand b { color: #5ce1ff; font-weight: 700; }
+
+    /* Masthead */
+    .masthead {
+      border-bottom: var(--rule);
+      padding-bottom: var(--space-lg);
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-md);
+    }
+
+    .masthead-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .identity-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+    }
+    .identity-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    /* Honest Boundary Notification Strip */
+    .notice-strip {
+      background-color: var(--surface-container);
+      border-left: var(--boundary-bar);
+      padding: var(--space-md);
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+    .notice-strip-icon {
+      color: var(--warning);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .notice-strip p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: var(--on-surface);
+    }
+    .notice-strip strong {
+      font-weight: 600;
+    }
+
+    /* KPI Summary Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+
+    .kpi-tile {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      border-radius: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .kpi-tile.key-tile {
+      border-bottom: var(--indicator);
+    }
+    .kpi-value {
+      font-family: var(--font-label);
+      font-weight: 300;
+      font-size: 2rem;
+      line-height: 1.1;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+    }
+    .kpi-helper {
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      margin-top: auto;
+      padding-top: var(--space-xs);
+    }
+
+    /* Filter & Search Console */
+    .control-panel {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      display: grid;
+      gap: var(--space-md);
+    }
+
+    .domain-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-bottom: var(--rule);
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid transparent;
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      cursor: pointer;
+      font-family: var(--font-body);
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--on-surface-variant);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .tab-btn:hover {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .tab-btn.is-active {
+      color: var(--on-surface);
+      font-weight: 600;
+      border-bottom: var(--indicator);
+    }
+    .tab-count {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      background-color: var(--background);
+      padding: 1px 6px;
+      border-radius: var(--rounded-full);
+    }
+    .tab-btn.is-active .tab-count {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+
+    .filter-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.2fr) auto;
+      gap: var(--space-md);
+      align-items: end;
+    }
+
+    .field-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .field-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+
+    .input-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .carbon-input, .carbon-select {
+      width: 100%;
+      height: 40px;
+      background-color: var(--background);
+      border: none;
+      border-bottom: var(--field-rule);
+      border-radius: var(--rounded);
+      padding: 0 var(--space-md);
+      color: var(--on-surface);
+      font-size: 0.9375rem;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .carbon-input {
+      padding-left: 2.25rem;
+      padding-right: 2.25rem;
+    }
+    .carbon-select {
+      padding-right: var(--space-xl);
+      cursor: pointer;
+    }
+    .input-icon {
+      position: absolute;
+      left: var(--space-sm);
+      color: var(--on-surface-variant);
+      pointer-events: none;
+      display: inline-flex;
+    }
+    .clear-search-btn {
+      position: absolute;
+      right: var(--space-xs);
+      background: transparent;
+      border: none;
+      min-width: 32px;
+      min-height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--on-surface-variant);
+    }
+    .clear-search-btn:hover {
+      color: var(--on-surface);
+      background-color: var(--surface-container-high);
+    }
+    .clear-search-btn[hidden] {
+      display: none;
+    }
+
+    .action-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: end;
+    }
+
+    .btn {
+      height: 40px;
+      min-height: 40px;
+      padding: var(--space-sm) var(--space-lg) var(--space-sm) var(--space-md);
+      border-radius: 0;
+      font-family: var(--font-body);
+      font-size: 0.875rem;
+      font-weight: 400;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      text-align: left;
+      white-space: nowrap;
+      transition: background-color var(--dur-micro) var(--ease-out), color var(--dur-micro) var(--ease-out);
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid var(--primary);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-hover);
+      border-color: var(--primary-hover);
+    }
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+    }
+    .btn-secondary:hover {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    .btn-ghost {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid transparent;
+      padding-right: var(--space-md);
+    }
+    .btn-ghost:hover {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+
+    /* Tags & Status Indicators */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 var(--space-sm);
+      border-radius: var(--rounded-full);
+      font-size: 0.75rem;
+      font-weight: 400;
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      white-space: nowrap;
+    }
+    .tag-neutral {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+    .tag-positive {
+      background-color: var(--positive-container);
+      color: var(--positive);
+      font-weight: 500;
+    }
+    .tag-warning {
+      background-color: var(--warning-container);
+      color: var(--on-surface);
+      font-weight: 500;
+    }
+    .tag-error {
+      background-color: var(--error-container);
+      color: var(--error);
+      font-weight: 500;
+    }
+
+    /* Cross-Mapping Matrix Table / Accordion */
+    .matrix-shell {
+      border-top: var(--rule);
+      border-bottom: var(--rule);
+    }
+
+    .matrix-header-row {
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr) minmax(0, 1.1fr) minmax(0, 1.5fr) minmax(0, 1fr) 44px;
+      gap: var(--space-md);
+      background-color: var(--surface-container-high);
+      padding: var(--space-sm) var(--space-md);
+      align-items: center;
+    }
+    .matrix-header-cell {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface);
+    }
+
+    .matrix-entry {
+      border-top: var(--rule);
+      background-color: var(--background);
+    }
+    .matrix-entry:nth-child(even) .matrix-row-btn {
+      background-color: var(--surface-container-low);
+    }
+    .matrix-entry.is-expanded {
+      border-left: var(--primary-bar);
+    }
+    .matrix-entry.is-highlighted {
+      background-color: var(--primary-container);
+    }
+
+    .matrix-row-btn {
+      width: 100%;
+      border: none;
+      background-color: var(--background);
+      padding: var(--space-md);
+      display: grid;
+      grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.6fr) minmax(0, 1.1fr) minmax(0, 1.5fr) minmax(0, 1fr) 44px;
+      gap: var(--space-md);
+      align-items: start;
+      text-align: left;
+      cursor: pointer;
+      color: var(--on-surface);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .matrix-row-btn:hover {
+      background-color: var(--surface-container-high) !important;
+    }
+
+    .problem-title {
+      font-weight: 600;
+      color: var(--on-surface);
+      display: block;
+      margin-bottom: 2px;
+    }
+    .problem-desc {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+      display: block;
+    }
+
+    .tool-name {
+      font-weight: 600;
+      color: var(--primary);
+      display: block;
+    }
+    .matrix-row-btn:hover .tool-name {
+      color: var(--on-surface);
+    }
+    .repo-slug {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--on-surface-variant);
+      display: block;
+      word-break: break-word;
+    }
+
+    .gate-summary {
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      display: block;
+    }
+
+    .evidence-cell {
+      font-family: var(--font-label);
+      font-size: 0.8125rem;
+      color: var(--on-surface);
+      font-variant-numeric: tabular-nums;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      align-items: flex-start;
+    }
+
+    .expand-chevron {
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--on-surface-variant);
+      transition: transform var(--dur-short) var(--ease-out);
+    }
+    .matrix-entry.is-expanded .expand-chevron {
+      transform: rotate(180deg);
+      color: var(--primary);
+    }
+
+    /* Expanded Detail Drawer (Inline inside each matrix row) */
+    .matrix-detail {
+      background-color: var(--surface-container);
+      padding: var(--space-lg) var(--space-md);
+      border-top: var(--rule);
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-lg);
+      animation: panelReveal var(--dur-short) var(--ease-out);
+    }
+    .matrix-detail[hidden] {
+      display: none;
+    }
+
+    @keyframes panelReveal {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .detail-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .detail-block-title {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface);
+      border-bottom: var(--rule);
+      padding-bottom: var(--space-xs);
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .term-card {
+      background-color: var(--background);
+      padding: var(--space-sm) var(--space-md);
+      border-left: 2px solid var(--outline);
+    }
+    .term-card dt {
+      font-weight: 600;
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      margin-bottom: 2px;
+    }
+    .term-card dd {
+      margin: 0;
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+      line-height: 1.45;
+    }
+
+    .context-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+    }
+    .context-list li {
+      border-bottom: var(--rule);
+      padding-bottom: var(--space-xs);
+    }
+    .context-list li:last-child {
+      border-bottom: none;
+    }
+    .context-key {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      display: block;
+    }
+
+    .safety-list {
+      margin: 0;
+      padding-left: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      font-size: 0.875rem;
+      color: var(--on-surface);
+    }
+    .safety-list li::marker {
+      color: var(--primary);
+    }
+
+    .cli-box {
+      background-color: var(--surface-container-high);
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--on-surface);
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin-top: var(--space-xs);
+    }
+
+    .detail-footer-tags {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: var(--rule);
+    }
+    .tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    /* Empty State */
+    .empty-state {
+      background-color: var(--surface-container);
+      padding: var(--space-xl);
+      text-align: left;
+      border-left: var(--primary-bar);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+    .empty-state[hidden] {
+      display: none;
+    }
+
+    /* Asymmetric Two-Column Workspace Panels */
+    .split-5-7 {
+      display: grid;
+      grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+    .split-7-5 {
+      display: grid;
+      grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+      gap: var(--space-lg);
+      align-items: start;
+    }
+
+    .panel {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .panel-inner {
+      background-color: var(--background);
+      padding: var(--space-md);
+      border-top: var(--rule);
+    }
+
+    /* Interactive Symptom Diagnostic */
+    .symptom-list {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 2px;
+      background-color: var(--outline-variant);
+    }
+    .symptom-btn {
+      width: 100%;
+      background-color: var(--background);
+      border: none;
+      border-left: 3px solid transparent;
+      padding: var(--space-sm) var(--space-md);
+      min-height: 44px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 0.875rem;
+      color: var(--on-surface);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .symptom-btn:hover {
+      background-color: var(--surface-container-high);
+    }
+    .symptom-btn.is-active {
+      border-left: var(--primary-bar);
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      font-weight: 600;
+    }
+
+    .diagnostic-flow {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-sm);
+    }
+    .flow-step {
+      background-color: var(--background);
+      padding: var(--space-sm) var(--space-md);
+      border-left: 2px solid var(--outline);
+    }
+    .flow-step.step-gate {
+      border-left: 2px solid var(--primary);
+    }
+    .flow-step.step-outcome {
+      border-left: 2px solid var(--positive);
+    }
+    .flow-step p {
+      margin: 2px 0 0;
+      font-size: 0.875rem;
+      color: var(--on-surface);
+    }
+
+    /* SVG Topology Schematic */
+    .topology-wrap {
+      background-color: var(--background);
+      border: var(--rule);
+      padding: var(--space-md);
+      overflow-x: auto;
+    }
+    .topology-svg {
+      width: 100%;
+      min-width: 600px;
+      height: auto;
+      display: block;
+    }
+    .topo-node {
+      cursor: pointer;
+    }
+    .topo-rect {
+      fill: var(--surface-container);
+      stroke: var(--outline);
+      stroke-width: 1;
+      transition: fill var(--dur-micro) var(--ease-out), stroke var(--dur-micro) var(--ease-out);
+    }
+    .topo-node:hover .topo-rect {
+      fill: var(--primary-container);
+      stroke: var(--primary);
+      stroke-width: 1.5;
+    }
+    .topo-core-rect {
+      fill: var(--primary-container);
+      stroke: var(--primary);
+      stroke-width: 2;
+    }
+    .topo-node:hover .topo-core-rect {
+      fill: var(--surface-container-high);
+    }
+    .topo-title {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      fill: var(--on-surface);
+    }
+    .topo-sub {
+      font-family: var(--font-label);
+      font-size: 10px;
+      fill: var(--on-surface-variant);
+    }
+    .topo-edge {
+      stroke: var(--outline);
+      stroke-width: 1.5;
+      fill: none;
+    }
+    .topo-edge-contract {
+      stroke: var(--primary);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 3;
+      fill: none;
+    }
+    .topo-zone-label {
+      font-family: var(--font-label);
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      fill: var(--on-surface-variant);
+    }
+
+    /* Chart Container */
+    .chart-box {
+      background-color: var(--background);
+      padding: var(--space-md);
+      min-height: 330px;
+      position: relative;
+    }
+
+    /* Glossary Reference List */
+    .glossary-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
+      border-top: var(--rule);
+    }
+    .glossary-item {
+      border-bottom: var(--rule);
+      padding: var(--space-sm) 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .glossary-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-sm);
+    }
+    .glossary-term {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+    }
+    .glossary-link-btn {
+      background: transparent;
+      border: none;
+      padding: 2px 6px;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--primary);
+      cursor: pointer;
+    }
+    .glossary-link-btn:hover {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+    }
+    a.glossary-link-btn { text-decoration: none; border-radius: var(--rounded); }
+    .glossary-def {
+      margin: 0;
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Operational Career Timeline */
+    .timeline-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+      gap: var(--space-md);
+    }
+    .timeline-card {
+      background-color: var(--surface-container);
+      padding: var(--space-md);
+      border-top: 2px solid var(--outline);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .timeline-card.is-recent {
+      border-top: var(--indicator);
+    }
+    .timeline-role {
+      font-weight: 600;
+      font-size: 0.9375rem;
+      color: var(--on-surface);
+    }
+    .timeline-org {
+      font-size: 0.875rem;
+      color: var(--on-surface-variant);
+    }
+    .timeline-bridge {
+      font-size: 0.8125rem;
+      color: var(--on-surface);
+      margin-top: var(--space-xs);
+      padding-top: var(--space-xs);
+      border-top: var(--rule);
+    }
+
+    /* Footer */
+    .page-footer {
+      border-top: var(--rule);
+      padding-top: var(--space-md);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-md);
+      font-size: 0.8125rem;
+      color: var(--on-surface-variant);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 980px) {
+      .matrix-header-row {
+        display: none;
+      }
+      .matrix-row-btn {
+        grid-template-columns: minmax(0, 1fr) 44px;
+        gap: var(--space-sm);
+      }
+      .matrix-row-btn > :nth-child(1) { grid-column: 1 / 2; }
+      .matrix-row-btn > :nth-child(2) { grid-column: 1 / 2; }
+      .matrix-row-btn > :nth-child(3) { grid-column: 1 / 2; }
+      .matrix-row-btn > :nth-child(4) { grid-column: 1 / 2; }
+      .matrix-row-btn > :nth-child(5) { grid-column: 1 / 2; }
+      .matrix-row-btn > :nth-child(6) { grid-column: 2 / 3; grid-row: 1 / 2; }
+
+      .matrix-detail {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .split-5-7, .split-7-5 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+      .filter-row {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-grid {
+        padding: var(--space-sm) var(--space-sm) var(--space-xl);
+        gap: var(--space-lg);
+      }
+      .domain-tabs {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+      }
+      .tab-btn {
+        white-space: nowrap;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="cockpit/shell.css">
+  <link rel="stylesheet" href="cockpit/sami.css">
+</head>
+<body>
+  <!-- SIDEBAR INDEX -->
+  <aside class="side-index" id="side-index" aria-label="App index">
+    <div class="side-brand">
+      <strong>DE://C2 Cockpit</strong>
+      <span>Portfolio · learning · career</span>
+    </div>
+    <h2>Index of this app</h2>
+    <nav id="side-nav">
+      <a href="#day-os" data-accent="#4fd1a1">Today <span>· control room</span></a>
+      <a href="#n8n" data-accent="#ff9f68">n8n <span>· automation</span></a>
+      <a href="#planning" data-accent="#ff9f68">Planning <span>· tools</span></a>
+      <a href="#competence" data-accent="#58d6a0">Competence <span>· growth</span></a>
+      <a href="#review" data-accent="#ff8fc7">Weekly review <span>· close</span></a>
+      <a href="#german" data-accent="#62d0d8">German v5 <span>· listening</span></a>
+      <a href="#portable" data-accent="#79d6c0">History <span>· export/import</span></a>
+      <a href="#monthly" data-accent="#79d6c0">Monthly <span>· trend</span></a>
+      <a href="#control-panel" data-accent="#79b8ff">Domains <span>· filter</span></a>
+      <a href="#matrix" data-accent="#c4a2ff">Matrix <span>· 18 systems</span></a>
+      <a href="#topology" data-accent="#ff8fc7">Topology <span>· symptoms</span></a>
+      <a href="#evidence" data-accent="#f2c14e">Glossary <span>· evidence</span></a>
+      <a href="#lineage" data-accent="#62d0d8">Lineage <span>· history</span></a>
+    </nav>
+    <div class="side-controls">
+      <button type="button" id="theme-toggle" title="Switch theme">☀ Light</button>
+      <button type="button" id="motion-toggle" title="Reduce motion">◐ Motion</button>
+      <button type="button" id="focus-toggle" title="Focus mode">◎ Focus</button>
+      <button type="button" id="intensity-toggle" title="Colour intensity">◐ Colour: balanced</button>
+    </div>
+    <button type="button" class="sami-launch" id="sami-open">
+      ✦ Ask Sami
+      <small>voice · memory · recommendations</small>
+    </button>
+    <div class="side-links">
+      <a href="https://github.com/Hatemshalaby15071979" target="_blank" rel="noopener">GitHub ↗</a>
+      <a href="https://www.linkedin.com/in/hatem-shalaby-202902127" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+    <p class="side-foot">Local-first. Your answers live in learning-records/. Nothing here is published.</p>
+  </aside>
+
+  <div class="page-grid">
+
+    <!-- MASTHEAD -->
+    <header class="masthead">
+      <a class="hs-brand" href="https://github.com/Hatemshalaby15071979" rel="noopener" aria-label="Helix Solutions on GitHub">
+        <img src="assets/helix-solutions-logo.svg" alt="Helix Solutions" width="28" height="28">
+        <span>Helix <b>Solutions</b></span>
+      </a>
+      <div class="masthead-top">
+        <div>
+          <span class="mono-label">Portfolio Architecture &amp; Reference Matrix · Snapshot 22 Nov 2026</span>
+          <h1 class="headline">Hatem Shalaby <strong>Operations &amp; AI Portfolio Matrix</strong></h1>
+        </div>
+        <div class="identity-meta">
+          <span><i data-lucide="map-pin" width="14" height="14" aria-hidden="true"></i> Al Obour City, Egypt (Remote / Hybrid)</span>
+          <span><i data-lucide="git-branch" width="14" height="14" aria-hidden="true"></i> github.com/Hatemshalaby15071979</span>
+          <span><i data-lucide="shield-check" width="14" height="14" aria-hidden="true"></i> MIT Licence · Local-First</span>
+        </div>
+      </div>
+
+      <p class="lede">
+        An interactive cross-mapping between real contact-centre operational friction and governed, local-first software systems. Built from 28 years of operational floor leadership across ByteDance, TTEC, Uber, Vodafone UK, and Aero Service Egypt (1998–2026).
+      </p>
+
+      <div class="notice-strip" role="note" aria-label="Honest portfolio boundary">
+        <span class="notice-strip-icon" aria-hidden="true">
+          <i data-lucide="alert-triangle" width="18" height="18"></i>
+        </span>
+        <p>
+          <strong>Honest boundary:</strong> Pre-pilot portfolio; production <strong>NOT_READY</strong>. Helix Prime carries nine production-only gates red by design (no external security audit, no certified data isolation, no assigned on-call owner, £/$0 verified revenue). Every metric and test count below reflects documented repository snapshots rather than live customer deployments.
+        </p>
+      </div>
+    </header>
+
+    <section class="n8n-section accent-planning" id="n8n" data-accent="planning" aria-labelledby="n8n-heading">
+      <h2 id="n8n-heading" class="section-heading">n8n · self-hosted automation</h2>
+      <div id="n8n-root"><p class="day-os-note">Checking the live service.</p></div>
+    </section>
+
+    <section class="day-os accent-today" id="day-os" data-accent="today" aria-labelledby="day-os-heading">
+      <h2 id="day-os-heading" class="section-heading">Today</h2>
+      <div id="day-os-root">
+        <p class="day-os-note">Loading the day from the two project folders.</p>
+      </div>
+    </section>
+
+    <section class="planning accent-planning" id="planning" data-accent="planning" aria-labelledby="planning-heading">
+      <h2 id="planning-heading" class="section-heading">Planning · control room</h2>
+      <div id="planning-root"><p class="day-os-note">Loading the week.</p></div>
+    </section>
+
+    <section class="competence accent-competence" id="competence" data-accent="competence" aria-labelledby="competence-heading">
+      <h2 id="competence-heading" class="section-heading">Competence map · growth over months</h2>
+      <div id="competence-root"><p class="day-os-note">Loading the map.</p></div>
+    </section>
+
+    <section class="review accent-review" id="review" data-accent="review" aria-labelledby="review-heading">
+      <h2 id="review-heading" class="section-heading">Weekly review · close the loop</h2>
+      <div id="review-root"><p class="day-os-note">Loading the review.</p></div>
+    </section>
+
+    <section class="german accent-german" id="german" data-accent="german" aria-labelledby="german-heading">
+      <h2 id="german-heading" class="section-heading">German v5 · learning track</h2>
+      <div id="german-root"><p class="day-os-note">Loading the German pilot.</p></div>
+    </section>
+
+    <section class="portable accent-data" id="portable" data-accent="data" aria-labelledby="portable-heading">
+      <h2 id="portable-heading" class="section-heading">Portable history · export &amp; import</h2>
+      <div id="portable-root"><p class="day-os-note">Loading the history tools.</p></div>
+    </section>
+
+    <section class="monthly accent-data" id="monthly" data-accent="data" aria-labelledby="monthly-heading">
+      <h2 id="monthly-heading" class="section-heading">Monthly trend · four weeks into one line</h2>
+      <div id="monthly-root"><p class="day-os-note">Loading the monthly rollup.</p></div>
+    </section>
+
+    <!-- KPI TELEMETRY TILES -->
+    <section id="telemetry" data-accent="control" class="accent-control" aria-label="Portfolio summary telemetry">
+      <div class="kpi-grid">
+        <div class="kpi-tile key-tile">
+          <span class="mono-label">Mapped Systems &amp; Samples</span>
+          <span class="kpi-value">18</span>
+          <span class="kpi-helper">1 core spine, 4 May–Jun precursors, 11 independent repos &amp; work samples — incl. Assay and Mannschaft (Nov 2026)</span>
+        </div>
+        <div class="kpi-tile">
+          <span class="mono-label">Verified Automated Tests</span>
+          <span class="kpi-value">4,355</span>
+          <span class="kpi-helper">Helix Prime 2,107 · Study Studio 986 · Helix Ed 465 · SigmaHelix 385 · Others 412</span>
+        </div>
+        <div class="kpi-tile">
+          <span class="mono-label">Production Gates Held Closed</span>
+          <span class="kpi-value">9 / 9</span>
+          <span class="kpi-helper">Held red by design pending pilot partner, legal privacy &amp; external audit</span>
+        </div>
+        <div class="kpi-tile">
+          <span class="mono-label">Generative Models in Exec Path</span>
+          <span class="kpi-value">0</span>
+          <span class="kpi-helper">Deterministic gates govern approvals, abstentions, LUFS/FFT &amp; RBAC</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- FILTER & SEARCH CONTROLS -->
+    <section class="control-panel accent-control" id="control-panel" data-accent="control" aria-label="Domain filter and search controls">
+      <div class="domain-tabs" role="tablist" aria-label="Filter by operational or technical domain">
+        <button type="button" class="tab-btn is-active" data-domain="All" onclick="setDomainFilter('All')" role="tab" aria-selected="true">
+          All Domains <span class="tab-count" id="count-all">18</span>
+        </button>
+        <button type="button" class="tab-btn" data-domain="Workforce Management" onclick="setDomainFilter('Workforce Management')" role="tab" aria-selected="false">
+          Workforce Management <span class="tab-count" id="count-wfm">6</span>
+        </button>
+        <button type="button" class="tab-btn" data-domain="Governance & Audit" onclick="setDomainFilter('Governance & Audit')" role="tab" aria-selected="false">
+          Governance &amp; Audit <span class="tab-count" id="count-gov">10</span>
+        </button>
+        <button type="button" class="tab-btn" data-domain="AI Runtimes" onclick="setDomainFilter('AI Runtimes')" role="tab" aria-selected="false">
+          AI Runtimes <span class="tab-count" id="count-ai">9</span>
+        </button>
+        <button type="button" class="tab-btn" data-domain="Tech Stack" onclick="setDomainFilter('Tech Stack')" role="tab" aria-selected="false">
+          Tech Stack <span class="tab-count" id="count-tech">10</span>
+        </button>
+      </div>
+
+      <div class="filter-row">
+        <div class="field-group">
+          <label class="field-label" for="matrix-search">Search operational problems, tools, terms or fail-closed mechanics</label>
+          <div class="input-wrap">
+            <span class="input-icon" aria-hidden="true">
+              <i data-lucide="search" width="16" height="16"></i>
+            </span>
+            <input
+              type="text"
+              id="matrix-search"
+              class="carbon-input"
+              placeholder="e.g. adherence, Erlang C, UNMAPPED, LUFS, confidence gate, FastAPI…"
+              oninput="handleSearchInput(this.value)"
+            >
+            <button
+              type="button"
+              id="clear-search-btn"
+              class="clear-search-btn"
+              onclick="clearSearch()"
+              aria-label="Clear search query"
+              hidden
+            >
+              <i data-lucide="x" width="15" height="15" aria-hidden="true"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="stage-filter">Lifecycle stage</label>
+          <select id="stage-filter" class="carbon-select" onchange="setStageFilter(this.value)">
+            <option value="All">All lifecycle stages</option>
+            <option value="Core Spine">Core operations spine</option>
+            <option value="Released">Released / CI-verified</option>
+            <option value="Candidate">Pre-production / shadow candidate</option>
+            <option value="Precursor">May–Jun 2026 precursor</option>
+          </select>
+        </div>
+
+        <div class="action-row">
+          <button type="button" class="btn btn-secondary" onclick="expandAllVisible()">
+            <i data-lucide="chevrons-down" width="16" height="16" aria-hidden="true"></i>
+            Expand visible
+          </button>
+          <button type="button" class="btn btn-ghost" onclick="collapseAll()">
+            Collapse all
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 1: OPERATIONAL PROBLEM -> SOFTWARE TOOL CROSS-MAPPING MATRIX -->
+    <section id="matrix" data-accent="matrix" class="accent-matrix" aria-labelledby="matrix-heading">
+      <div class="section-head">
+        <div>
+          <span class="mono-label">Interactive Cross-Mapping Matrix</span>
+          <h2 id="matrix-heading" class="section-heading">Operational Problem to Software Tool Mapping</h2>
+        </div>
+        <span class="mono-label" id="results-status">Showing 18 of 18 entries · Click any row to expand definitions &amp; fail-closed rules</span>
+      </div>
+
+      <div class="matrix-shell" id="matrix-container">
+        <div class="matrix-header-row" aria-hidden="true">
+          <div class="matrix-header-cell">Operational Problem</div>
+          <div class="matrix-header-cell">Software Tool &amp; Repository</div>
+          <div class="matrix-header-cell">Primary Domain</div>
+          <div class="matrix-header-cell">Fail-Closed Gate</div>
+          <div class="matrix-header-cell">Snapshot Evidence</div>
+          <div class="matrix-header-cell"></div>
+        </div>
+        <div id="matrix-rows"></div>
+      </div>
+
+      <div class="empty-state" id="matrix-empty" hidden>
+        <span class="mono-label">No matching mappings</span>
+        <h3 class="subhead">No portfolio tools match your current domain, stage, or search terms.</h3>
+        <p style="margin: 0; color: var(--on-surface-variant);">Try broadening the lifecycle stage or clearing your search query to inspect all 18 systems.</p>
+        <button type="button" class="btn btn-primary" onclick="resetAllFilters()">Reset all filters</button>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SYMPTOM DIAGNOSTIC & PORTFOLIO ARCHITECTURE TOPOLOGY -->
+    <section id="topology" data-accent="topology" class="accent-topology" aria-labelledby="topology-heading">
+      <div class="section-head">
+        <div>
+          <span class="mono-label">System Lineage &amp; Floor Triage</span>
+          <h2 id="topology-heading" class="section-heading">Floor Symptom Diagnostic &amp; Helix Codex Topology</h2>
+        </div>
+        <span class="mono-label">Click a floor symptom or schematic node to inspect its deterministic gate</span>
+      </div>
+
+      <div class="split-5-7">
+        <!-- Left: Symptom Diagnostic -->
+        <div class="panel">
+          <div>
+            <span class="mono-label">Interactive Triage</span>
+            <h3 class="subhead">Operational Floor Symptom to Gate</h3>
+          </div>
+          <div class="symptom-list" id="symptom-list" role="listbox" aria-label="Operational floor symptoms"></div>
+          <div class="diagnostic-flow" id="diagnostic-output"></div>
+          <div>
+            <button type="button" class="btn btn-primary" id="jump-to-matrix-btn" onclick="jumpToDiagnosticEntry()">
+              <i data-lucide="arrow-up-right" width="16" height="16" aria-hidden="true"></i>
+              Inspect in matrix
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Topology Schematic -->
+        <div class="panel">
+          <div>
+            <span class="mono-label">Contract Boundary Schematic</span>
+            <h3 class="subhead">Precursors → Helix Prime Core → Live Client &amp; Satellites</h3>
+          </div>
+          <div class="topology-wrap">
+            <svg class="topology-svg" viewBox="0 0 760 470" role="img" aria-label="Helix Codex architecture diagram showing four 2026 precursors feeding Helix Prime, Blue Waves consuming it via contract, and nine independent satellite repositories including Assay and Mannschaft">
+              <defs>
+                <marker id="arrow-solid" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--outline)" />
+                </marker>
+                <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                  <path d="M 0 1 L 10 5 L 0 9 z" fill="var(--primary)" />
+                </marker>
+              </defs>
+
+              <!-- Column Labels -->
+              <text x="16" y="20" class="topo-zone-label">1. May–Jun 2026 Precursors (Logic Absorbed)</text>
+              <text x="275" y="20" class="topo-zone-label">2. Governed Core Spine</text>
+              <text x="530" y="20" class="topo-zone-label">3. Vertical &amp; Satellites</text>
+
+              <!-- Edges: Precursors -> Helix Prime -->
+              <path d="M 216 70 L 270 140" class="topo-edge" marker-end="url(#arrow-solid)" />
+              <path d="M 216 148 L 270 175" class="topo-edge" marker-end="url(#arrow-solid)" />
+              <path d="M 216 226 L 270 215" class="topo-edge" marker-end="url(#arrow-solid)" />
+              <path d="M 216 304 L 270 250" class="topo-edge" marker-end="url(#arrow-solid)" />
+
+              <!-- Edge: Helix Prime -> Blue Waves (Live external contract) -->
+              <path d="M 480 145 L 530 78" class="topo-edge-contract" marker-end="url(#arrow-blue)" />
+              <text x="485" y="96" class="topo-sub">live contract</text>
+
+              <!-- Precursor Nodes -->
+              <g class="topo-node" onclick="focusTool('wfm-calc')" tabindex="0" role="button" aria-label="Inspect WFM Forecasting Calculator">
+                <rect x="16" y="42" width="200" height="56" class="topo-rect" />
+                <text x="28" y="64" class="topo-title">WFM Forecasting Calculator</text>
+                <text x="28" y="82" class="topo-sub">Erlang C → engines/wfm/</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('rta-center')" tabindex="0" role="button" aria-label="Inspect RTA Command Center">
+                <rect x="16" y="120" width="200" height="56" class="topo-rect" />
+                <text x="28" y="142" class="topo-title">RTA Command Center</text>
+                <text x="28" y="160" class="topo-sub">Adherence → RTA engine</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('cx-sentinel')" tabindex="0" role="button" aria-label="Inspect CX Sentiment Sentinel">
+                <rect x="16" y="198" width="200" height="56" class="topo-rect" />
+                <text x="28" y="220" class="topo-title">CX Sentiment Sentinel</text>
+                <text x="28" y="238" class="topo-sub">KPI decay → CX engine</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('dynamic-ops')" tabindex="0" role="button" aria-label="Inspect Dynamic Ops Automation Engine">
+                <rect x="16" y="276" width="200" height="56" class="topo-rect" />
+                <text x="28" y="298" class="topo-title">Dynamic Ops Engine</text>
+                <text x="28" y="316" class="topo-sub">Tenancy → B2B &amp; WFM</text>
+              </g>
+
+              <!-- Core Node: Helix Prime -->
+              <g class="topo-node" onclick="focusTool('helix-prime')" tabindex="0" role="button" aria-label="Inspect Helix Prime Core">
+                <rect x="275" y="110" width="205" height="175" class="topo-core-rect" />
+                <text x="290" y="136" class="topo-title">Helix Prime (Helix-Codex)</text>
+                <text x="290" y="156" class="topo-sub">v0.9.0 · 2,107 tests · 9 gates red</text>
+                <text x="290" y="182" class="topo-sub">• 6 engines / 9 governed seats</text>
+                <text x="290" y="200" class="topo-sub">• Deny-by-default RBAC</text>
+                <text x="290" y="218" class="topo-sub">• Fail-closed deterministic gate</text>
+                <text x="290" y="236" class="topo-sub">• Hash-chained audit ledger</text>
+                <text x="290" y="254" class="topo-sub">• Read-only Zendesk/SF/Clay</text>
+              </g>
+
+              <!-- Live Vertical: Blue Waves -->
+              <g class="topo-node" onclick="focusTool('blue-waves')" tabindex="0" role="button" aria-label="Inspect Blue Waves">
+                <rect x="530" y="42" width="214" height="68" class="topo-rect" />
+                <text x="542" y="64" class="topo-title">Blue Waves (Commercial Vertical)</text>
+                <text x="542" y="82" class="topo-sub">v0.3.0 · 167 tests · Default hold</text>
+                <text x="542" y="96" class="topo-sub">FFprobe / LUFS / FFT quality gate</text>
+              </g>
+
+              <!-- Independent Satellites Group Box -->
+              <rect x="530" y="132" width="214" height="330" fill="none" stroke="var(--outline-variant)" stroke-dasharray="3 3" />
+              <text x="540" y="148" class="topo-zone-label">Independent Codebases</text>
+
+              <g class="topo-node" onclick="focusTool('sigmahelix')" tabindex="0" role="button" aria-label="Inspect SigmaHelix-OS">
+                <rect x="540" y="158" width="194" height="36" class="topo-rect" />
+                <text x="550" y="175" class="topo-title">SigmaHelix-OS (The Hub)</text>
+                <text x="550" y="188" class="topo-sub">v1.0.0 · 385 tests · Tommy + SQLite</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('live-support')" tabindex="0" role="button" aria-label="Inspect LIVE Support Assistant">
+                <rect x="540" y="202" width="194" height="36" class="topo-rect" />
+                <text x="550" y="219" class="topo-title">LIVE Support Assistant</text>
+                <text x="550" y="232" class="topo-sub">Local RAG · 0 unsupported answers</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('signoff')" tabindex="0" role="button" aria-label="Inspect Signoff and CreateLee">
+                <rect x="540" y="246" width="194" height="36" class="topo-rect" />
+                <text x="550" y="263" class="topo-title">Signoff &amp; CreateLee</text>
+                <text x="550" y="276" class="topo-sub">100% offline · UNMAPPED gate</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('compliproof')" tabindex="0" role="button" aria-label="Inspect CompliProof">
+                <rect x="540" y="290" width="194" height="36" class="topo-rect" />
+                <text x="550" y="307" class="topo-title">CompliProof</text>
+                <text x="550" y="320" class="topo-sub">100k rows/4.6s · 7 P0s open</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('helix-ed')" tabindex="0" role="button" aria-label="Inspect Helix Education and Study Studio">
+                <rect x="540" y="334" width="194" height="36" class="topo-rect" />
+                <text x="550" y="351" class="topo-title">Helix Ed &amp; Study Studio</text>
+                <text x="550" y="364" class="topo-sub">465 + 986 tests · Event log / Tauri</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('assay')" tabindex="0" role="button" aria-label="Inspect Assay">
+                <rect x="540" y="378" width="194" height="36" class="topo-rect" />
+                <text x="550" y="395" class="topo-title">Assay (Helix Solutions)</text>
+                <text x="550" y="408" class="topo-sub">v0.4.0 · offline · PENDING-HUMAN gate</text>
+              </g>
+
+              <g class="topo-node" onclick="focusTool('mannschaft')" tabindex="0" role="button" aria-label="Inspect Mannschaft">
+                <rect x="540" y="414" width="194" height="36" class="topo-rect" />
+                <text x="550" y="431" class="topo-title">Mannschaft (Helix Solutions)</text>
+                <text x="550" y="444" class="topo-sub">V6 · 12 lessons · 227 tests · loopback only</text>
+              </g>
+            </svg>
+          </div>
+          <p style="margin: 0; font-size: 0.8125rem; color: var(--on-surface-variant);">
+            Architecture boundary: Satellites share the fail-closed design philosophy without shared source code. Only Blue Waves consumes Helix Prime over live governance contracts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: VERIFIED TEST COVERAGE CHART & GLOSSARY -->
+    <section id="evidence" data-accent="evidence" class="accent-evidence" aria-labelledby="evidence-heading">
+      <div class="section-head">
+        <div>
+          <span class="mono-label">Measured Verification &amp; Terminology</span>
+          <h2 id="evidence-heading" class="section-heading">Automated Test Coverage &amp; Safety Glossary</h2>
+        </div>
+        <span class="mono-label">Dated CI &amp; local test measurements (Oct–Nov 2026)</span>
+      </div>
+
+      <div class="split-7-5">
+        <!-- Chart.js Bar Chart -->
+        <div class="panel">
+          <div>
+            <span class="mono-label">Passing Automated Tests by Repository</span>
+            <h3 class="subhead">Verified Test Suite Depth (Count of Passing Checks)</h3>
+          </div>
+          <div class="chart-box">
+            <canvas id="coverageChart" aria-label="Horizontal bar chart showing passing automated test counts across seven repositories"></canvas>
+          </div>
+          <p style="margin: 0; font-size: 0.8125rem; color: var(--on-surface-variant);">
+            Click a bar to open the lesson behind that evidence. Four May–June 2026 precursors (Dynamic Ops, RTA Command Center, WFM Calculator, CX Sentinel) carry 0 collected pytest tests and are therefore omitted from suite totals; WFM Calculator ships 5 inline self-tests.
+          </p>
+        </div>
+
+        <!-- Core Terms & Fail-Closed Mechanics Glossary -->
+        <div class="panel">
+          <div>
+            <span class="mono-label">Reference Definitions</span>
+            <h3 class="subhead">Governance, WFM &amp; Safety Glossary</h3>
+            <p class="day-os-note" style="margin-top:.35rem">Each term links to the lesson that teaches it, and to the place to write your answer — not back into this page.</p>
+          </div>
+          <div class="glossary-grid" id="glossary-list"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: OPERATIONAL FLOOR LINEAGE -->
+    <section id="lineage" data-accent="lineage" class="accent-lineage" aria-labelledby="lineage-heading">
+      <div class="section-head">
+        <div>
+          <span class="mono-label">Domain Provenance (1998–2026)</span>
+          <h2 id="lineage-heading" class="section-heading">Operational Floor Friction That Shaped the Codebase</h2>
+        </div>
+        <span class="mono-label">28 years operational experience · 4 roles with operational reporting lines (up to 15 staff)</span>
+      </div>
+
+      <div class="timeline-grid">
+        <article class="timeline-card is-recent">
+          <span class="mono-label">2026 – Present · Independent Developer</span>
+          <div class="timeline-role">Governed, Local-First AI Systems</div>
+          <div class="timeline-org">Self-funded public portfolio · Pre-pilot</div>
+          <p class="timeline-bridge">Built Helix Prime, LIVE Support Assistant, Signoff, CompliProof, SigmaHelix-OS, and Blue Waves around one rule: on missing input or authority, refuse rather than guess.</p>
+        </article>
+
+        <article class="timeline-card">
+          <span class="mono-label">Sep 2025 – Mar 2026 · ByteDance (Cairo)</span>
+          <div class="timeline-role">Multilingual CS &amp; Ops Lead (TL2) — TikTok LIVE</div>
+          <div class="timeline-org">TL1 operational reporting line &amp; on-call escalations</div>
+          <p class="timeline-bridge">Observed agents losing handle time in fragmented SOPs; built a lookup prototype for a 1-month uninstrumented trial — directly inspiring <strong>LIVE Support Assistant</strong>.</p>
+        </article>
+
+        <article class="timeline-card">
+          <span class="mono-label">2023 – 2025 · TTEC (Maadi, Cairo)</span>
+          <div class="timeline-role">Process Optimisation Specialist</div>
+          <div class="timeline-org">RTA, Quality, SME &amp; ICU/APU performance units</div>
+          <p class="timeline-bridge">Targeted quality sessions from agent KPI decay and ran 4–6 week ICU/APU monitoring — shaping <strong>RTA Command Center</strong> &amp; <strong>CX Sentinel</strong>.</p>
+        </article>
+
+        <article class="timeline-card">
+          <span class="mono-label">2012 – Oct 2023 · Vodafone UK &amp; Uber</span>
+          <div class="timeline-role">WFM Analyst · Onboarding SME · Driver Activation</div>
+          <div class="timeline-org">Up to 21 concurrent waves (~15 agents each)</div>
+          <p class="timeline-bridge">Forecasting and scheduling in Excel/Power BI plus solo India/UK onboarding seeded <strong>WFM Forecasting Calculator</strong> and <strong>Helix Education</strong>.</p>
+        </article>
+
+        <article class="timeline-card">
+          <span class="mono-label">1998 – 2012 · Aviation &amp; Intl. Trade</span>
+          <div class="timeline-role">Senior Ops Officer (airberlin) · Director (Shorouk)</div>
+          <div class="timeline-org">50+ daily flights at Hurghada Airport · 15+ countries</div>
+          <p class="timeline-bridge">Audit/inspection readiness (safety, security, fraud) and 2011 operational continuity instilled strict fail-closed handover discipline.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <div>
+        <strong>Sources:</strong> Portfolio &amp; repository READMEs rendered Oct–Nov 2026 (<em>Helix-Codex, Blue-Waves, CompliProof, Dynamic-Ops-Automation-Engine, Helix-Education, L-D-Command-Center, RTA_command_center, SigmaHelix-OS, Sign-off, Study-Studio, createlee, cx-sentiment-sentinel, wfm-forecasting-calculator, work-samples, Hatem_Shalaby_Resume, Assay, Mannschaft</em> — last re-synced 22 Nov 2026).
+      </div>
+      <div class="mono-label" style="text-transform: none; letter-spacing: 0.04em;">
+        github.com/Hatemshalaby15071979 · MIT Licence · historical old-account provenance retained on 7 local-only precursor entries
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    const PORTFOLIO_ENTRIES = [
+      {
+        id: `helix-prime`,
+        problemTitle: `Unchecked multi-engine operations & AI execution risk`,
+        problemDesc: `Contact-centre workflows spanning forecasting, adherence, CRM, and onboarding risk SLA breaches if an AI agent executes unverified actions.`,
+        toolName: `Helix Prime (Helix-Codex)`,
+        repo: `Hatemshalaby15071979/Helix-Codex`,
+        primaryDomain: `Governance & Audit`,
+        domains: [`Governance & Audit`, `Workforce Management`, `AI Runtimes`, `Tech Stack`],
+        stage: `Core Spine`,
+        stageLabel: `Core Spine · v0.9.0`,
+        gateSummary: `Deterministic fail-closed gate + deny-by-default RBAC across 9 seats`,
+        evidenceMetric: `2,107 tests pass`,
+        evidenceBadge: `9 gates red by design`,
+        evidenceTone: `warning`,
+        terms: [
+          {
+            term: `Fail-Closed Deterministic Gate`,
+            def: `Pre-execution check evaluating cost, data classification, confidence, and ownership; holds execution rather than guessing.`
+          },
+          {
+            term: `Six-Engine Operations Core`,
+            def: `WFM (Erlang C staffing), RTA, CX churn, B2B onboarding, personnel, and CRM routed across nine governed role seats.`
+          },
+          {
+            term: `Read-Only CRM Connectors`,
+            def: `Zendesk, Salesforce, and Clay integrations with live writes intentionally disabled in pre-pilot mode.`
+          }
+        ],
+        repoContext: [
+          { k: `Release & CI`, v: `v0.9.0 local simulation candidate on release/simulated-production-2026-11; hosted CI green; 2,107 tests pass on Python 3.12 against synthetic fixtures.` },
+          { k: `Contract Boundary`, v: `Every other portfolio repository is a separate codebase; only Blue Waves consumes Helix Prime as a live external client over versioned contracts.` },
+          { k: `Production Readiness`, v: `NOT_READY — 9 production gates remain red (signed evidence, certified isolation, external security/privacy review, DR evidence, named on-call owner).` }
+        ],
+        safetyMechanics: [
+          `Zero generative models sit in the execution path — on a live floor, a hallucinated action is an SLA breach.`,
+          `API refuses to boot in the production profile without required external gate inputs.`,
+          `Append-only, hash-chained audit ledger records every decision and state transition before execution.`,
+          `Passwordless demo endpoint is explicitly marked forbidden on any deployed instance.`
+        ],
+        cli: `pip install 'helix-codex-os[web]'\nhelix-api      # governed API spine (127.0.0.1:8000)\nhelix-app      # demo app (127.0.0.1:8100)\nhelix-cockpit  # read-only diagnostic dashboard (127.0.0.1:8501)`
+      },
+      {
+        id: `rta-center`,
+        problemTitle: `Shift adherence lag on live contact-centre floors`,
+        problemDesc: `Delay between an agent deviating from schedule and intraday supervisors receiving actionable alerts before SLA slippage.`,
+        toolName: `RTA Command Center`,
+        repo: `HatemIsmailShalaby1979/RTA_command_center`,
+        primaryDomain: `Workforce Management`,
+        domains: [`Workforce Management`],
+        stage: `Precursor`,
+        stageLabel: `May–Jun 2026 Precursor`,
+        gateSummary: `Threshold alert generation & retraction of unbaselined impact claims`,
+        evidenceMetric: `361-line engine`,
+        evidenceBadge: `No pytest suite`,
+        evidenceTone: `neutral`,
+        terms: [
+          {
+            term: `Shift Adherence (RTACalculations)`,
+            def: `Per-agent percentage of scheduled interval time worked in planned state, computed from schedule/adherence CSVs via time_to_minutes and calculate_adherence.`
+          },
+          {
+            term: `Intraday Threshold Alerts`,
+            def: `Configurable variance triggers (generate_alerts) surfacing out-of-adherence patterns and daily trend shifts.`
+          }
+        ],
+        repoContext: [
+          { k: `Lineage`, v: `Built May–June 2026; adherence logic later absorbed into Helix Prime's RTA engine.` },
+          { k: `Files & Packaging Gaps`, v: `src/calculations.py (361 lines) restored cleanly; src/app.py (299 lines, Streamlit); visualizations.py (291 lines, Plotly) sits at root, requiring launch from repo root. requirements.txt omits pandas, numpy, plotly, openpyxl.` },
+          { k: `Verification`, v: `Inline test_calculations() assertions exist inside the module, but no collected test suite runs under pytest.` }
+        ],
+        safetyMechanics: [
+          `Explicitly retracts four earlier impact claims (14→40 tasks, 100% quality, 0 DSAT, ~8 hrs→0) and a "Production-ready" label lacking baseline or method.`,
+          `Labels CRM layer as simulated and states absence of authentication, role separation, and tenant isolation.`,
+          `Preserves _archive/calculations_root_stub.py transparently as a non-functional stub rather than hiding history.`
+        ],
+        cli: `pip install streamlit pandas numpy plotly openpyxl\npython -m streamlit run src/app.py  # run from repo root so visualizations resolves`
+      },
+      {
+        id: `wfm-calc`,
+        problemTitle: `Interval staffing & Erlang C capacity miscalculation`,
+        problemDesc: `Translating forecast call volume, AHT, and shrinkage into exact agent headcount to hit Service Level without overstaffing.`,
+        toolName: `WFM Forecasting Calculator`,
+        repo: `HatemIsmailShalaby1979/wfm-forecasting-calculator`,
+        primaryDomain: `Workforce Management`,
+        domains: [`Workforce Management`],
+        stage: `Precursor`,
+        stageLabel: `May–Jun 2026 Precursor`,
+        gateSummary: `Pure deterministic Erlang C maths with verified boundary self-tests`,
+        evidenceMetric: `5/5 inline self-tests`,
+        evidenceBadge: `Measured 2026-09-27`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Erlang C Probability`,
+            def: `Probability that an arriving contact must wait in queue; e.g., erlang_c(10, 8.5) = 0.5299.`
+          },
+          {
+            term: `Occupancy & ASA`,
+            def: `Agent utilisation percentage (occupancy(8.5, 12) = 70.83%) and Average Speed of Answer in seconds (10.09 s in reference test).`
+          },
+          {
+            term: `AHT Unit Contract`,
+            def: `required_agents expects Average Handling Time strictly in seconds, not minutes.`
+          }
+        ],
+        repoContext: [
+          { k: `Lineage`, v: `Built May–June 2026; five pure static methods on ErlangCCalculator later became Helix Prime's engines/wfm/ module.` },
+          { k: `Scope`, v: `416-line Streamlit app (app_wfm.py) covering quick staffing, interval plans, shrinkage, and FTE monthly cost projections plus Excel variance exports.` },
+          { k: `Gaps Disclosed`, v: `requirements.txt lists only streamlit==1.31.0 (missing pandas, plotly, numpy, openpyxl). SciPy is unused despite earlier README claims.` }
+        ],
+        safetyMechanics: [
+          `Pure deterministic mathematical functions verified against boundary conditions (erlang_c strictly within 0–1; required 14 agents check passes).`,
+          `Retracts earlier forecast variance and schedule-build time benchmarks with no recorded baseline.`,
+          `Flags no live WFM feed, persistence, or authentication — strictly a standalone calculator.`
+        ],
+        cli: `python -c "import sys; sys.path.insert(0, '.'); from shared_utils.erlang_c import ErlangCCalculator as E; print(E.required_agents(100, 180, 30, 0.8, 20))"`
+      },
+      {
+        id: `cx-sentinel`,
+        problemTitle: `Silent multi-KPI SLA & CSAT decay across accounts`,
+        problemDesc: `Gradual negative drift across CSAT, SLA, FCR, and rising AHT going undetected until an account breaches contract thresholds.`,
+        toolName: `CX Sentiment & Churn Sentinel`,
+        repo: `HatemIsmailShalaby1979/cx-sentiment-sentinel`,
+        primaryDomain: `Workforce Management`,
+        domains: [`Workforce Management`, `Tech Stack`],
+        stage: `Precursor`,
+        stageLabel: `May–Jun 2026 Precursor`,
+        gateSummary: `Fail-closed Postgres password check & public credential audit record`,
+        evidenceMetric: `4 KPI weighted rules`,
+        evidenceBadge: `Name overpromises`,
+        evidenceTone: `warning`,
+        terms: [
+          {
+            term: `Directional KPI Decay`,
+            def: `Risk formula decay × weight × 100 (capped at 100): CSAT (0.40), SLA (0.30), FCR (0.20) worsen when lower; AHT (0.10) worsens when higher.`
+          },
+          {
+            term: `Severity Bucketing`,
+            def: `Configurable thresholds in risk_thresholds.yaml classifying accounts as Critical (≥ 70), High (≥ 50), Medium (≥ 30), or Low.`
+          }
+        ],
+        repoContext: [
+          { k: `Lineage`, v: `Built May–June 2026; 5-stage Parquet pipeline (Postgres SQL views → raw → normalised → scored → alerts/feed) later absorbed into Helix Prime's CX engine.` },
+          { k: `Honest Disclosure`, v: `Zero NLP sentiment analysis and zero fitted ML churn model exist in code; missing shared_utils package causes ModuleNotFoundError when run unmodified.` },
+          { k: `Security Record`, v: `SECURITY_DECISIONS.md documents a real rotated plaintext DB password incident (commit a78d5d8) and remaining git-history purge tasks.` }
+        ],
+        safetyMechanics: [
+          `docker-compose.yml fails closed if POSTGRES_PASSWORD is unset.`,
+          `categorise_risk() operates as a pure configurable heuristic without opaque ML black boxes.`,
+          `Retracts earlier unsubstantiated churn-reduction and "Verified sentiment-accuracy" claims.`
+        ],
+        cli: `pip install pandas pyarrow\npython -c "from risk_scorer import score_clients; print(score_clients('normalized_kpi.parquet'))"`
+      },
+      {
+        id: `dynamic-ops`,
+        problemTitle: `Multi-tenant operational ingest & SLA webhook routing`,
+        problemDesc: `Ingesting forecasts, KPI health snapshots, and adherence events across clients without leaking tenant configs or booting unconfigured.`,
+        toolName: `Dynamic Ops Automation Engine`,
+        repo: `HatemIsmailShalaby1979/Dynamic-Ops-Automation-Engine`,
+        primaryDomain: `Tech Stack`,
+        domains: [`Tech Stack`, `Workforce Management`],
+        stage: `Precursor`,
+        stageLabel: `May–Jun 2026 Precursor`,
+        gateSummary: `Refuses to boot without DB_PASSWORD; strict X-Tenant-ID isolation`,
+        evidenceMetric: `4 typed POST endpoints`,
+        evidenceBadge: `0 tests (disclosed)`,
+        evidenceTone: `neutral`,
+        terms: [
+          {
+            term: `TenantMiddleware`,
+            def: `Resolves X-Tenant-ID header to an isolated TenantContext carrying per-tenant SLAConfig, ErlangThresholds, AlertSeverity, and WebhookDestination.`
+          },
+          {
+            term: `Ordered Middleware Stack`,
+            def: `CORS outermost → UUID RequestIDMiddleware → X-Response-Time-Ms timing → TenantMiddleware.`
+          }
+        ],
+        repoContext: [
+          { k: `Lineage`, v: `Only May–June 2026 tool written as an async FastAPI service; seeded Helix Prime's B2B Onboarding and WFM engines.` },
+          { k: `Implementation`, v: `Implements _erlang_b and _erlang_c in app/services/wfm_engine.py, SentinelEngine KPI threshold evaluation, and WebhookDispatcher fan-out.` },
+          { k: `Scope Retractions`, v: `Plainly discloses 0 test files, no Notion integration, no Excel output, and tracked placeholder .env files needing cleanup.` }
+        ],
+        safetyMechanics: [
+          `Fail-closed startup: importing the app without DB credentials raises Pydantic ValidationError (DB_PASSWORD: Field required).`,
+          `Rejects unknown or inactive tenants with HTTP 403 / 404 before endpoint logic executes.`,
+          `Automatically disables /docs, /redoc, and /openapi.json when is_production is enabled.`
+        ],
+        cli: `pip install -r Ops_Automation_Hub/requirements.txt\nuvicorn app.main:app --reload  # requires DB_HOST, DB_PASSWORD, REDIS_HOST`
+      },
+      {
+        id: `live-support`,
+        problemTitle: `SOP fragmentation & floor guesswork under handle-time pressure`,
+        problemDesc: `Agents losing handle time across fast-changing procedures or risking customer SLA breaches from AI assistants that hallucinate answers.`,
+        toolName: `LIVE Support Assistant`,
+        repo: `Hatemshalaby15071979/live-support-assistant`,
+        primaryDomain: `AI Runtimes`,
+        domains: [`AI Runtimes`, `Governance & Audit`],
+        stage: `Candidate`,
+        stageLabel: `Shadow-Mode Prototype`,
+        gateSummary: `Deterministic confidence gate escalates to human instead of guessing`,
+        evidenceMetric: `105 tests · 0.7778 acc`,
+        evidenceBadge: `0 unsupported answers`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Confidence Gate`,
+            def: `Escalates to a human when top retrieval score is not decisively ahead of runner-up, preventing forced guesses.`
+          },
+          {
+            term: `Shadow-Mode Pilot`,
+            def: `Controlled evaluation alongside agents (inspired by a 1-month TikTok LIVE TL2 lookup trial) with 10 verification checks gating escalation.`
+          }
+        ],
+        repoContext: [
+          { k: `Evaluated Evidence`, v: `In rag-work-sample (15 synthetic procedures, 36 labelled cases, 105 tests), gated workflow hits 28/36 accuracy vs 13/36 baseline, 8/8 escalations, and 7/8 abstentions.` },
+          { k: `Honest Trade-Off`, v: `Scores 2/8 vs 3/8 baseline on paraphrased queries because strict gating refuses weak evidence rather than taking a lucky guess.` },
+          { k: `Privacy & CI`, v: `Hosted CI passing; on-device retrieval keeps procedure corpora strictly on the local machine.` }
+        ],
+        safetyMechanics: [
+          `Zero generative models sit in the answering path (rag-work-sample).`,
+          `Zero unsupported answers (0 vs 16 in retrieval-only baseline); refuses to publish a self-contradictory corpus.`,
+          `No procedure text leaked on escalation; query text redacted by default in structured JSON logs.`
+        ],
+        cli: `cd rag-work-sample && python run_eval.py && python -m pytest\ndocker compose up --build  # serves 127.0.0.1:8080 (/health, /ready)`
+      },
+      {
+        id: `signoff`,
+        problemTitle: `Proving "how AI touched our customers" with auditable evidence`,
+        problemDesc: `Operations leaders facing client AI compliance questionnaires without deterministic traceability back to customer-owned records.`,
+        toolName: `Signoff`,
+        repo: `Hatemshalaby15071979/Sign-off`,
+        primaryDomain: `Governance & Audit`,
+        domains: [`Governance & Audit`],
+        stage: `Candidate`,
+        stageLabel: `Locally Verified · v0.1.0`,
+        gateSummary: `Unanswerable items forced to UNMAPPED; zero network or AI in path`,
+        evidenceMetric: `140 tests · 88% cov`,
+        evidenceBadge: `100% offline`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `UNMAPPED State`,
+            def: `Mandatory label for any questionnaire item that cannot be backed by an authorised evidence row — never guessed or extrapolated.`
+          },
+          {
+            term: `Human-Authorised Mapping Table`,
+            def: `Explicit human rule (named owner + date + verified=yes) governing what export data counts as valid evidence.`
+          }
+        ],
+        repoContext: [
+          { k: `Inputs & Outputs`, v: `Takes a client AI questionnaire (CSV/Word/Excel/text) + customer CSV exports; outputs a cited dossier (HTML/PDF/JSON/CSV), gap list, and 1-page Oversight Statement.` },
+          { k: `Verification`, v: `140 tests passed, 88% coverage, byte-identical deterministic runs, hosted CI green, read-only non-root Docker.` },
+          { k: `Distinction`, v: `Explicitly notes packs are hash-consistent (artifact digests replay), not cryptographically signed; demo data anonymisation not externally audited.` }
+        ],
+        safetyMechanics: [
+          `100% offline by construction — zero network imports, zero external calls, zero environment credential reads.`,
+          `Zero generative AI models anywhere in the evidence path.`,
+          `Produces a blank signature block requiring a named human owner rather than automated sign-off.`
+        ],
+        cli: `pip install -e .\nsignoff --help`
+      },
+      {
+        id: `createlee`,
+        problemTitle: `Rehearsing compliance evidence gates safely pre-client`,
+        problemDesc: `Validating CSV ingestion schemas and dossier pipelines before live client operational exports are available or cleared.`,
+        toolName: `CreateLee`,
+        repo: `Hatemshalaby15071979/createlee`,
+        primaryDomain: `Governance & Audit`,
+        domains: [`Governance & Audit`],
+        stage: `Candidate`,
+        stageLabel: `Synthetic Rehearsal`,
+        gateSummary: `Acceptance validator blocks stale/malformed CSV rehearsal packs`,
+        evidenceMetric: `6 PASS / 2 findings`,
+        evidenceBadge: `0 FAIL (golden set)`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Eight CSV Export Contracts`,
+            def: `QA reviews, audit events, approvals, escalations, role specs, AI inventory, training records, and incident notifications.`
+          },
+          {
+            term: `Golden Acceptance Target`,
+            def: `opencode_next_step_kit/golden_examples/ verified by validate_signoff_csv.mjs as ACCEPTABLE.`
+          }
+        ],
+        repoContext: [
+          { k: `Three-Set Warning`, v: `Repository holds three copies: golden examples pass (0 FAIL), older rehearsal library fails 4 files, external docs folder fails 7 of 8.` },
+          { k: `Honest Clarification`, v: `Warns readers not to confuse a separate "72/72 PASS" Createlee platform report with the CSV acceptance contract.` }
+        ],
+        safetyMechanics: [
+          `100% synthetic data — contains zero client records and closes zero production gates.`,
+          `Validator explicitly rejects older and model-generated CSV sets as NOT ACCEPTABLE.`
+        ],
+        cli: `node opencode_next_step_kit/validate_signoff_csv.mjs opencode_next_step_kit/golden_examples/`
+      },
+      {
+        id: `compliproof`,
+        problemTitle: `Cross-system CSV export discrepancies & reconciliation gaps`,
+        problemDesc: `Comparing two system exports by shared ID to isolate missing rows, field mismatches, and audit evidence without guesswork.`,
+        toolName: `CompliProof`,
+        repo: `Hatemshalaby15071979/CompliProof`,
+        primaryDomain: `Governance & Audit`,
+        domains: [`Governance & Audit`, `Tech Stack`],
+        stage: `Candidate`,
+        stageLabel: `Pre-Production Candidate`,
+        gateSummary: `Hash-chained audit trail + 7 open P0 blocks on customer data use`,
+        evidenceMetric: `100k rows in ~4.6s`,
+        evidenceBadge: `7 P0s open`,
+        evidenceTone: `warning`,
+        terms: [
+          {
+            term: `Three-Way Row Classification`,
+            def: `Matches two CSV exports by shared key and surfaces exact matches, one-sided rows, and value differences in HTML/PDF/CSV reports.`
+          },
+          {
+            term: `P0 Release Findings`,
+            def: `Seven critical pre-release findings tracked in company-os requiring owner-signed closure before production use.`
+          }
+        ],
+        repoContext: [
+          { k: `Verification`, v: `Hosted GitHub Actions green on main; security scan and dependency audit clean; wheel builds; Docker health check returns {"ok": true}; 31 conditional scale cases skipped.` },
+          { k: `Readiness Docs`, v: `Full remediation history documented in SHIPMENT_READINESS.md, AUDIT_REPORT.md, and REMEDIATION_PLAN.md.` }
+        ],
+        safetyMechanics: [
+          `Every reconciliation result outputs a hash-chained local audit trail and evidence pack.`,
+          `Explicitly marked not production-ready, not audit-grade, not a compliance determination, and not approved for customer data.`
+        ],
+        cli: `pip install -e .\ncompliproof --help`
+      },
+      {
+        id: `blue-waves`,
+        problemTitle: `Unverified AI media quality & autonomous public publishing`,
+        problemDesc: `Multi-format content pipelines (video, music, podcasts) risk emitting broken renders, loud/silent audio, or unapproved uploads.`,
+        toolName: `Blue Waves`,
+        repo: `HatemIsmailShalaby1979/Blue-Waves-`,
+        primaryDomain: `AI Runtimes`,
+        domains: [`AI Runtimes`, `Governance & Audit`],
+        stage: `Candidate`,
+        stageLabel: `Commercial Vertical · v0.3.0`,
+        gateSummary: `No agent approves its own publish; hard ffprobe/LUFS/FFT/silence gates`,
+        evidenceMetric: `167 tests · CI green`,
+        evidenceBadge: `$0 rev · 9 gates red`,
+        evidenceTone: `warning`,
+        terms: [
+          {
+            term: `Hard Media Quality Proxies`,
+            def: `Video (1080p/30fps/h264 via ffprobe), Music (-14 LUFS, 48kHz stereo), Podcast (-16 LUFS), plus FFT and silence detection.`
+          },
+          {
+            term: `SHEPO Finance Agent`,
+            def: `Tracks per-provider costs, CPM projections, break-even, and provider ROI (explicitly a model while revenue is $0).`
+          }
+        ],
+        repoContext: [
+          { k: `Helix Prime Integration`, v: `First commercial vertical consuming Helix Prime as a live external client over versioned contracts (never embedded).` },
+          { k: `Cockpit & Pipeline`, v: `cockpit_ui.py (12 panels), local generation first (Ken Burns 1080p, Suno, ElevenLabs TTS) with Kling/Seedance/ACE-Step cloud paths and FFmpeg mastering.` },
+          { k: `Disclosed Gaps`, v: `No Dockerfile built; YouTube oEmbed visibility returned 403 on test upload; 9 production gates remain red by design.` }
+        ],
+        safetyMechanics: [
+          `Default state is hold (awaiting_owner); approval is blocked if preview is missing, empty, or below gate.`,
+          `Cloud providers fail closed until explicit owner consent; every external action logged to hash-chained audit_events.`
+        ],
+        cli: `pip install -e .\nblue-waves preflight --video /path/to/video.mp4\npython start_cockpit.py  # serves http://127.0.0.1:8420`
+      },
+      {
+        id: `sigmahelix`,
+        problemTitle: `Multi-repo operational sprawl & unverified agent edits`,
+        problemDesc: `Tracking project health, daily tasks, and coding-agent edits across repositories without cloud telemetry or plaintext API keys.`,
+        toolName: `SigmaHelix-OS (The Hub)`,
+        repo: `Hatemshalaby15071979/SigmaHelix-OS`,
+        primaryDomain: `Tech Stack`,
+        domains: [`Tech Stack`, `AI Runtimes`, `Governance & Audit`],
+        stage: `Released`,
+        stageLabel: `Released · v1.0.0`,
+        gateSummary: `OS keyring fail-closed keys, shell=False launchers, SHA-256 chain`,
+        evidenceMetric: `385 tests · 72% cov`,
+        evidenceBadge: `v1.0.0 Released`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Task-as-Question Model`,
+            def: `Every task holds sub-questions with attached evidence and is marked complete only once every question is answered.`
+          },
+          {
+            term: `Tommy & Mind Tab`,
+            def: `Local-first (Ollama) or opt-in cloud agent scanning cloned_repos/; every turn and self-edit recommendation is logged to a hash-proven ledger requiring human approval.`
+          }
+        ],
+        repoContext: [
+          { k: `Single-File Architecture`, v: `Durable typed core (no GUI imports) backed by one SQLite file (~/.local/share/sigmahelix/sigmahelix.db); zero accounts, sync, or telemetry.` },
+          { k: `CI & Release`, v: `Each v* tag builds wheel & sdist; ./scripts/ci.sh validates format, lint, types, compile, 385 tests, and CLI smoke.` }
+        ],
+        safetyMechanics: [
+          `Cloud models off by default; API keys stored only in OS keyring (fails closed if unavailable; rejected from config.yaml and env vars).`,
+          `Launcher profiles execute command lists with shell=False and whitelisted env; prompt endpoints strictly loopback-only with per-session tokens.`,
+          `Append-only SHA-256 hash chain over every mutation, verifiable via sigmahelix audit verify.`
+        ],
+        cli: `sigmahelix start         # web UI (localhost)\nsigmahelix scan PATH...  # score repo health\nsigmahelix audit verify  # verify hash chain`
+      },
+      {
+        id: `study-studio`,
+        problemTitle: `Private study synthesis & bilingual audio without cloud lock-in`,
+        problemDesc: `Generating structured lessons, English/Arabic dual-host podcasts, and quizzes while keeping all prompts and library state on-device.`,
+        toolName: `Study Studio`,
+        repo: `Hatemshalaby15071979/Study-Studio`,
+        primaryDomain: `AI Runtimes`,
+        domains: [`AI Runtimes`, `Tech Stack`],
+        stage: `Released`,
+        stageLabel: `Released · v0.2.0 / 0.2.1`,
+        gateSummary: `Reports missing local runtime/ffmpeg instead of calling hosted APIs`,
+        evidenceMetric: `986 tests · 28/28 mut`,
+        evidenceBadge: `85.66% stmts · CI green`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Mutation Testing Gate`,
+            def: `28 of 28 targeted code mutations caught in CI, confirming test suites detect logic regressions.`
+          },
+          {
+            term: `Bundler Policy (Webpack Export)`,
+            def: `dev runs Turbopack while static builds use --webpack so compiled CSS stylesheets pass the design-token guard.`
+          }
+        ],
+        repoContext: [
+          { k: `Desktop Stack`, v: `Next.js client inside Tauri 2 (Rust) Windows shell (NSIS/MSI/portable); IndexedDB library; supports LM Studio, Ollama, Piper TTS → MP3/WAV.` },
+          { k: `CI Evidence`, v: `Run 36803605646: 47/47 suites, 986/986 tests, 100% lines on runtime.ts, clean tsc and eslint (--max-warnings 0). Mobile client removed; no hosted SaaS.` }
+        ],
+        safetyMechanics: [
+          `Generation defaults strictly offline; if local runtime or Piper/ffmpeg are missing, tells the user what is absent rather than reaching for a hosted API.`,
+          `Hermetic CI stays isolated unless LMSTUDIO_LIVE=1 or OLLAMA_LIVE=1 is explicitly opted in.`
+        ],
+        cli: `cd apps/desktop && npm install\nnpm run dev          # browser localhost:3000\nnpm run tauri:build  # Windows installer`
+      },
+      {
+        id: `helix-ed`,
+        problemTitle: `Unverifiable training progress & mutable quiz records`,
+        problemDesc: `Learning systems where completion claims cannot be replayed or assessment scores depend on mutable database rows or AI models.`,
+        toolName: `Helix Education`,
+        repo: `Hatemshalaby15071979/Helix-Education`,
+        primaryDomain: `Governance & Audit`,
+        domains: [`Governance & Audit`, `Tech Stack`],
+        stage: `Released`,
+        stageLabel: `Released · v2.1.1`,
+        gateSummary: `Append-only EventStore API + zero AI dependency in core scoring`,
+        evidenceMetric: `465 tests (Py 3.11–13)`,
+        evidenceBadge: `Core 0-AI · CI green`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Event Sourcing & Projection`,
+            def: `Learner state is never stored mutably; project_topic_state() replays append-only JSONL events from scratch.`
+          },
+          {
+            term: `Sealed Answer Keys`,
+            def: `Answer keys live in a separate store outside the repo dir; only the SHA-256 hash enters QuizItemCreatedEvent.`
+          }
+        ],
+        repoContext: [
+          { k: `Integration Status`, v: `Learning foundation for Helix Codex; gRPC CompetencyProfileLogic exists in business logic, but bindings are not yet generated/mounted into Helix Prime.` },
+          { k: `Precision on "Sealed"`, v: `Explicitly explains that append-only is an EventStore API contract (no update/delete/remove methods), not filesystem-level tamper protection on plain JSONL.` }
+        ],
+        safetyMechanics: [
+          `Zero AI dependency in core engine — lessons and sealed quiz scoring execute deterministically without an LLM.`,
+          `EncryptedSealedKeyStore refuses to start without a configured master key rather than falling back to a built-in default.`
+        ],
+        cli: `python -m pip install -e ".[dev]"\npython -m pytest -q  # 465 passed across Python 3.11, 3.12, 3.13`
+      },
+      {
+        id: `ld-center`,
+        problemTitle: `Skill & language training conflated with HR people-management`,
+        problemDesc: `Workstations mixing unstable AI drills with completed learning tracks and pretending to be enterprise HR systems of record.`,
+        toolName: `L&D Command Center`,
+        repo: `Hatemshalaby15071979/L-D-Command-Center`,
+        primaryDomain: `AI Runtimes`,
+        domains: [`AI Runtimes`],
+        stage: `Released`,
+        stageLabel: `Released · v1.0.0`,
+        gateSummary: `Frozen/unfrozen section isolation & dist/archive policy rollback`,
+        evidenceMetric: `30 lesson packs`,
+        evidenceBadge: `Mixed E2E logged`,
+        evidenceTone: `neutral`,
+        terms: [
+          {
+            term: `Frozen-by-Design Sections`,
+            def: `Journey and Audio modules stay explicitly frozen while Language Lab (ES/JA/DE), Career, and Playground evolve independently.`
+          },
+          {
+            term: `Policy Gate Rollback`,
+            def: `Automated safeguard restoring a known-good archive from dist/archive on policy failure.`
+          }
+        ],
+        repoContext: [
+          { k: `Architecture`, v: `PyWebView desktop shell (desktop_shell/app.py), quality_guard.py layer, auto-detect for Ollama (11434) and LM Studio (1234), A1–C1 exams, Career tools.` },
+          { k: `Honest E2E Log`, v: `E2E_SMOKE_REPORT.md records endpoint/policy PASS alongside a tkinter Tcl launch block, 60s generation timeout on test hardware, and unverified GitHub/LinkedIn sync.` }
+        ],
+        safetyMechanics: [
+          `Policy gate with deterministic dist/archive rollback.`,
+          `Explicitly notes pricing tiers on index.html are a design plan with zero payment path, account system, or customers.`
+        ],
+        cli: `RUN_LDCC.bat  # launch via cmd.exe (avoids PowerShell null-byte argument bug)`
+      },
+      {
+        id: `work-samples`,
+        problemTitle: `Unproven SQL performance, RAG accuracy & consulting ROI claims`,
+        problemDesc: `Evaluating engineering rigour when SQL plans, retrieval abstention rates, and business estimates omit baselines and failure disclosures.`,
+        toolName: `Work Samples (SQL / RAG / Proposal)`,
+        repo: `HatemIsmailShalaby1979/work-samples`,
+        primaryDomain: `Tech Stack`,
+        domains: [`Tech Stack`, `Workforce Management`, `AI Runtimes`],
+        stage: `Released`,
+        stageLabel: `Auditable Samples`,
+        gateSummary: `Zero-unsupported-answers phase gate & EXPLAIN covering-index proof`,
+        evidenceMetric: `8/8 SQL · 105 RAG`,
+        evidenceBadge: `Synthetic + baselines`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Covering Index Proof`,
+            def: `SQLite query plan shifts from table SCAN to SEARCH tickets USING COVERING INDEX — table never read.`
+          },
+          {
+            term: `Nullable Join Cardinality`,
+            def: `Proves inner join yields 1,079 of 1,122 rows because abandoned contacts intentionally carry NULL agent_id.`
+          }
+        ],
+        repoContext: [
+          { k: `Three Self-Contained Samples`, v: `sql-work-sample/ (0 external deps), rag-work-sample/ (Pydantic + Docker 6-step CI), proposal-work-sample/ (84 + 13 contingency man-days, verified arithmetic).` },
+          { k: `No Invented Rates`, v: `Consulting proposal expresses break-even as maximum blended day rate for year-one payback rather than guessing market rates.` }
+        ],
+        safetyMechanics: [
+          `Consulting acceptance defines a hard phase gate: zero unsupported answers on held-out set, or the phase fails regardless of other metrics.`,
+          `Synthetic data only, committed expected-output diffs, mandatory baselines, and candid limitations sections.`
+        ],
+        cli: `cd sql-work-sample && python run_checks.py\ncd rag-work-sample && python run_eval.py && python -m pytest`
+      },
+      {
+        id: `n8n-production`,
+        problemTitle: `Self-hosted automation without cloud lock-in or hidden runtime risk`,
+        problemDesc: `A solo operator serving several clients needs repeatable workflow automation with auditable secrets, bounded containers and a verified restore path — without handing the platform to a vendor.`,
+        toolName: `n8n Production Starter`,
+        repo: `local (no remote yet) · n8n-production`,
+        primaryDomain: `Tech Stack`,
+        domains: [`Tech Stack`, `AI Runtimes`],
+        stage: `Candidate`,
+        stageLabel: `v1.3.0 · 88% · deployed, not client-ready`,
+        gateSummary: `UID 1000, read-only root FS, dropped caps, bounded resources, internal-only DB, SHA256SUMS from the git index`,
+        evidenceMetric: `Live health 200 · backup/restore verified`,
+        evidenceBadge: `4 open blocks`,
+        evidenceTone: `warning`,
+        liveUrl: `http://127.0.0.1:5678/`,
+        terms: [
+          {
+            term: `Bounded Container Posture`,
+            def: `Non-root UID 1000, read-only root filesystem, dropped Linux capabilities and resource limits applied to the n8n stack.`
+          },
+          {
+            term: `Index-Derived SHA256SUMS`,
+            def: `Integrity manifest generated from the git index, so the manifest and the tracked repository cannot drift apart.`
+          },
+          {
+            term: `Restore Drill`,
+            def: `Backup taken outside the repository and restored into a disposable stack that came up healthy with no encryption-key mismatch.`
+          }
+        ],
+        repoContext: [
+          { k: `Verified on Host`, v: `Ubuntu 26.04 · RX 6700 XT · 16 vCPU. Compose starts postgres and n8n healthy; cloudflared image builds; n8n reaches host Ollama over the application bridge.` },
+          { k: `Local Status`, v: `Live at 127.0.0.1:5678 — health 200. Repository: 3 commits, 58 tracked files, clean tree, no remote.` },
+          { k: `Open Blocks`, v: `Cloudflare Tunnel token and hostname, Cloudflare Access with MFA, public webhook test, Trivy scan and host reinstall. Do not onboard clients until closed.` }
+        ],
+        safetyMechanics: [
+          `Fail-closed by posture: internal-only PostgreSQL, no public endpoint until Cloudflare Access with MFA exists.`,
+          `Backup/restore tested end to end rather than asserted; Ollama 0.40.16 on ROCm verified 100% on GPU for all four models.`,
+          `Honest boundary: 88% complete, deployed and exercised, but explicitly not client-ready.`
+        ],
+        cli: `curl -s http://127.0.0.1:5678/healthz
+# repo archive: Career/n8n-production-repo.tar`
+      },
+      {
+        id: `assay`,
+        problemTitle: `Sheet checks that pass by eyeball and cannot be replayed`,
+        problemDesc: `Auditors and verifiers repeat the same daily spreadsheet task without a traceable record of what the machine checked, what needed a human eye, or who closed the gap.`,
+        toolName: `Assay (Helix Solutions)`,
+        repo: `Hatemshalaby15071979/Assay`,
+        primaryDomain: `Governance & Audit`,
+        domains: [`Governance & Audit`, `Tech Stack`],
+        stage: `Candidate`,
+        stageLabel: `Staged preview · v0.4.0 · 22 Nov 2026`,
+        gateSummary: `Deterministic checks only; image and judgement items forced to PENDING-HUMAN and closed by a named actor`,
+        evidenceMetric: `CI gate green: tests · determinism · offline Docker · browser E2E · SBOM · security scan`,
+        evidenceBadge: `0 network calls in the check path`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `PENDING-HUMAN`,
+            def: `The only outcome for anything a machine cannot verify deterministically. The image is extracted locally, a named human confirms it, and the tool records who and when.`
+          },
+          {
+            term: `Hash-Chained Report Pack`,
+            def: `CSV report, structured audit log and extracted images are chained by digest so the result can be re-verified later without trusting the tool.`
+          },
+          {
+            term: `Fail-Closed Policy Actions`,
+            def: `A plain policy proposes row actions, but approving is not applying — only an explicit apply by a named human executes a change.`
+          }
+        ],
+        repoContext: [
+          { k: `Origin`, v: `Previously named Sheet Solution; deterministic spine reused from Signoff 0.1.0, with sheet comparison, CLI, GUI and distribution new to this repository.` },
+          { k: `Verification`, v: `Release readiness signed off by the owner on 2026-11-22 as a staged preview for local, single-user sheet-ops practitioners; findings F-02, F-03, F-07 and F-10 mitigated.` },
+          { k: `Scope`, v: `Offline by construction: no cloud, no AI model in the check path, and passport photos or other PII never leave the machine.` }
+        ],
+        safetyMechanics: [
+          `The machine never guesses — every machine-checkable rule is deterministic and verifiable.`,
+          `A durable intent/result ledger is written before and after every run; interrupted runs surface as pending, never as a silent partial report.`,
+          `Large input fails closed past --max-rows (default 500,000) instead of exhausting memory.`
+        ],
+        cli: `pip install "assay[xlsx]"
+assay run --sheet examples/example-sheet.xlsx --template examples/check-template.example.txt --out out/report
+assay verify --out out/report`
+      },
+      {
+        id: `mannschaft`,
+        problemTitle: `German listening practice that respects a single learner's attention`,
+        problemDesc: `A learner needs quiet, local, repeatable A1–C2 listening with visible evidence of progress — not a cloud account, ads, or an infinite content feed.`,
+        toolName: `Mannschaft (Helix Solutions)`,
+        repo: `Hatemshalaby15071979/Mannschaft`,
+        primaryDomain: `AI Runtimes`,
+        domains: [`AI Runtimes`, `Governance & Audit`],
+        stage: `Candidate`,
+        stageLabel: `V6 pilot · 12 lessons · 21 Nov 2026`,
+        gateSummary: `Loopback-only bind; refuses LAN addresses; no runtime scraping; VoiceStudio optional`,
+        evidenceMetric: `227 tests · 12 hand-authored lessons · 6 German TTS voices`,
+        evidenceBadge: `Local-only · installable offline PWA`,
+        evidenceTone: `positive`,
+        terms: [
+          {
+            term: `Listening-First Pilot`,
+            def: `Twelve hand-authored lessons, two per level from A1 to C2, with rendered audio, measured timelines and one curated YouTube clip each.`
+          },
+          {
+            term: `assert_loopback`,
+            def: `Startup guard that refuses 0.0.0.0 and LAN addresses; the service only ever binds 127.0.0.1:8766.`
+          },
+          {
+            term: `Deferred Scale-Out`,
+            def: `M10 (72 lessons) and M11 (v5.0.0 release) are explicitly deferred by the 2026-11-18 pilot decision — no auto-generation at scale.`
+          }
+        ],
+        repoContext: [
+          { k: `Local README`, v: `The working copy is named "Learning German"; the pushed GitHub repository is Mannschaft. Its README states local-ready and awaiting owner approval, while the GitHub copy is already published — a documentation mismatch recorded in this sync.` },
+          { k: `Corpus`, v: `790 scored candidate clips with a synthetic/uneven distribution (A1 has 3, B2 has 455), disclosed honestly rather than presented as a balanced course.` },
+          { k: `Brand`, v: `The mark is the founder company's helix geometry engraving, rendered by v5/tools/make_logo.py; the Helix Solutions master logo is now linked from the repository's local assets as well.` }
+        ],
+        safetyMechanics: [
+          `Nothing phones home, nothing binds beyond loopback, and no content is scraped at runtime.`,
+          `No secrets, tokens or API keys exist in the repository or its CI.`,
+          `YouTube clips load from youtube-nocookie.com with start/end and are never cached by the service worker; dictionary links are outbound only.`
+        ],
+        cli: `pip install -e '.[dev]'
+make check
+make serve  # http://127.0.0.1:8766`
+      }
+    ];
+
+    const FLOOR_SYMPTOMS = [
+      {
+        id: `sym-adherence`,
+        label: `Shift adherence breach detected too late`,
+        entryId: `rta-center`,
+        friction: `Supervisors discover schedule deviations after interval SLAs have already slipped.`,
+        gate: `RTACalculations parses schedule/adherence CSVs into deterministic per-agent % and threshold alerts — with simulated CRM limits disclosed.`,
+        outcome: `Absorbed into Helix Prime's RTA engine behind role-gated floor visibility.`
+      },
+      {
+        id: `sym-decay`,
+        label: `Silent multi-KPI decay across CSAT & AHT`,
+        entryId: `cx-sentinel`,
+        friction: `Single-metric averages hide compound account degradation when CSAT drops while AHT rises.`,
+        gate: `Weighted directional heuristic (0.40 CSAT, 0.30 SLA, 0.20 FCR, 0.10 inverted AHT) buckets risk; Postgres container fails closed without password.`,
+        outcome: `Seeded Helix Prime's CX churn engine with configurable YAML thresholds.`
+      },
+      {
+        id: `sym-sop`,
+        label: `SOP fragmentation & floor agent guesswork`,
+        entryId: `live-support`,
+        friction: `Agents lose handle time hunting fast-changing policies; standard RAG bots fabricate answers when confidence is weak.`,
+        gate: `Deterministic confidence gate checks top-vs-runner-up margin; refuses contradictory corpora and escalates to humans without leaking SOP text.`,
+        outcome: `0 unsupported answers (vs 16 baseline) across 36 evaluated policy cases.`
+      },
+      {
+        id: `sym-staffing`,
+        label: `Interval under/over-staffing in Erlang C`,
+        entryId: `wfm-calc`,
+        friction: `Spreadsheets hide AHT unit errors and lack deterministic occupancy and ASA boundary checks.`,
+        gate: `Pure static ErlangCCalculator methods verified by 5/5 boundary assertions (AHT strictly in seconds).`,
+        outcome: `Maths promoted directly into Helix Prime engines/wfm/.`
+      },
+      {
+        id: `sym-audit`,
+        label: `Client asks "how did AI touch our customers?"`,
+        entryId: `signoff`,
+        friction: `Teams answer compliance questionnaires with optimistic prose rather than customer-owned export evidence.`,
+        gate: `100% offline mapping engine: unprovable items forced to UNMAPPED; human-authorised mapping table (owner + date + verified=yes) required.`,
+        outcome: `Byte-identical HTML/PDF/JSON/CSV dossier + 1-page Oversight Statement with blank human signature block.`
+      },
+      {
+        id: `sym-publish`,
+        label: `Autonomous media release without quality review`,
+        entryId: `blue-waves`,
+        friction: `Generative pipelines risk publishing broken video, clipping audio, or silent tracks to live channels.`,
+        gate: `Mandatory ffprobe (1080p/30fps), -14/-16 LUFS, FFT & silence checks; default status is hold (awaiting_owner); cloud providers fail closed.`,
+        outcome: `Owner inspects real preview in Cockpit before YouTube upload; audit_events hash-chained.`
+      },
+      {
+        id: `sym-csv`,
+        label: `Two operational CSV exports disagree on totals`,
+        entryId: `compliproof`,
+        friction: `Manual spreadsheet reconciliations miss one-sided orphan rows and leave no reproducible evidence trail.`,
+        gate: `Shared-key matcher reconciles 100k rows in ~4.6s with hash-chained audit pack — explicitly held off customer data while 7 P0s stay open.`,
+        outcome: `Deterministic HTML/PDF/CSV discrepancy pack ready for P0 closure.`
+      },
+      {
+        id: `sym-sheet-check`,
+        label: `Daily sheet checks cannot be replayed or attributed`,
+        entryId: `assay`,
+        friction: `A person opens a sheet, checks what they were told to look for, and writes up the result — with no durable record of the exact rule, row or human behind a pass.`,
+        gate: `Deterministic checks decide only what is verifiable; image and judgement cases become PENDING-HUMAN with a named actor, time and extracted local evidence.`,
+        outcome: `Hash-chained report pack with intent/result ledger, verifying exactly what was checked and who closed the gap.`
+      },
+      {
+        id: `sym-listening`,
+        label: `Language practice pulled into a noisy cloud app`,
+        entryId: `mannschaft`,
+        friction: `Generic course apps require accounts, stream from distant services, and push unbounded content at a learner who needs short, repeatable listening.`,
+        gate: `Loopback-only server (127.0.0.1:8766), refuses LAN binds, no runtime scraping, and the TTS studio is optional rather than required.`,
+        outcome: `Twelve audited A1–C2 lessons with measured audio timelines, sentence cards, a glossary-derived dictionary and an offline PWA.`
+      }
+    ];
+
+    const GLOSSARY_TERMS = [
+      {
+        term: `Fail-Closed Gate`,
+        def: `Defaulting to halt, hold, or refuse whenever required inputs, credentials, confidence margins, or owner approvals are absent.`,
+        targetId: `helix-prime`,
+        lesson: `0001-fail-closed-gates.html`,
+      },
+      {
+        term: `Hash-Chained Audit Ledger`,
+        def: `Append-only log where each record hashes the preceding entry (SHA-256) so retrospective tampering breaks chain verification.`,
+        targetId: `sigmahelix`,
+        lesson: `0006-hash-chained-ledger.html`,
+      },
+      {
+        term: `Confidence Gate & Abstention`,
+        def: `Retrieval rule requiring decisive separation between top and runner-up matches; weak evidence triggers human escalation.`,
+        targetId: `live-support`,
+        lesson: `0009-rag-confidence-gate.html`,
+      },
+      {
+        term: `UNMAPPED Evidence Status`,
+        def: `Explicit refusal output in Signoff when no human-authorised export row supports a compliance question.`,
+        targetId: `signoff`,
+        lesson: `0003-rbac-deny-by-default.html`,
+      },
+      {
+        term: `Erlang C Staffing Model`,
+        def: `Queueing equations computing wait probability, Service Level, ASA, occupancy, and required agents per interval.`,
+        targetId: `wfm-calc`,
+        lesson: `0012-erlang-c-forecasting.html`,
+      },
+      {
+        term: `Directional KPI Decay`,
+        def: `Polarity-aware risk scoring where falling CSAT/SLA/FCR and rising AHT accumulate weighted breach risk.`,
+        targetId: `cx-sentinel`,
+        lesson: `0010-kpi-decay-score.html`,
+      },
+      {
+        term: `Event Sourcing & Replay`,
+        def: `Deriving learner or system state solely by replaying immutable append-only events rather than mutating database rows.`,
+        targetId: `helix-ed`,
+        lesson: `0002-event-sourcing-vs-logging.html`,
+      },
+      {
+        term: `LUFS / FFT Media Gate`,
+        def: `Automated loudness (-14 / -16 LUFS), frequency spectrum, silence, and ffprobe 1080p checks before owner review.`,
+        targetId: `blue-waves`,
+        lesson: `0023-ci-sbom-trivy.html`,
+      },
+      {
+        term: `Tenant Isolation (X-Tenant-ID)`,
+        def: `Middleware resolving each API request to an isolated tenant SLA and webhook profile, rejecting unknown tenants with 403/404.`,
+        targetId: `dynamic-ops`,
+        lesson: `0004-tenant-isolation.html`,
+      },
+      {
+        term: `Covering Index Search`,
+        def: `SQLite query plan satisfied directly from index entries without reading the underlying table rows.`,
+        targetId: `work-samples`,
+        lesson: `0021-data-stack.html`,
+      },
+      {
+        term: `P0 Release Findings`,
+        def: `Blocking severity findings tracked in readiness registers that prohibit customer deployment until owner-signed closure.`,
+        targetId: `compliproof`,
+        lesson: `0023-ci-sbom-trivy.html`,
+      },
+      {
+        term: `Production NOT_READY (9 Red Gates)`,
+        def: `Intentional pre-pilot posture acknowledging missing external security audit, certified isolation, DR evidence, and on-call ownership.`,
+        targetId: `helix-prime`,
+        lesson: `0001-fail-closed-gates.html`,
+      }
+    ];
+
+    const state = {
+      domain: `All`,
+      stage: `All`,
+      search: ``,
+      expandedIds: new Set([`helix-prime`]),
+      selectedSymptomId: `sym-adherence`,
+      highlightedId: null
+    };
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, `&amp;`)
+        .replace(/</g, `&lt;`)
+        .replace(/>/g, `&gt;`)
+        .replace(/"/g, `&quot;`)
+        .replace(/'/g, `&#39;`);
+    }
+
+    function getFilteredEntries() {
+      const q = state.search.trim().toLowerCase();
+      return PORTFOLIO_ENTRIES.filter((entry) => {
+        const domainMatch = state.domain === `All` || entry.domains.includes(state.domain);
+        const stageMatch = state.stage === `All` || entry.stage === state.stage;
+        if (!domainMatch || !stageMatch) return false;
+        if (!q) return true;
+
+        const haystack = [
+          entry.problemTitle,
+          entry.problemDesc,
+          entry.toolName,
+          entry.repo,
+          entry.primaryDomain,
+          entry.domains.join(` `),
+          entry.stageLabel,
+          entry.gateSummary,
+          entry.evidenceMetric,
+          entry.terms.map((t) => `${t.term} ${t.def}`).join(` `),
+          entry.repoContext.map((c) => `${c.k} ${c.v}`).join(` `),
+          entry.safetyMechanics.join(` `),
+          entry.cli
+        ].join(` `).toLowerCase();
+
+        return haystack.includes(q);
+      });
+    }
+
+    function getToneClass(tone) {
+      if (tone === `positive`) return `tag-positive`;
+      if (tone === `warning`) return `tag-warning`;
+      if (tone === `error`) return `tag-error`;
+      return `tag-neutral`;
+    }
+
+    function renderMatrix() {
+      const container = document.getElementById(`matrix-rows`);
+      const emptyEl = document.getElementById(`matrix-empty`);
+      const shellEl = document.getElementById(`matrix-container`);
+      const statusEl = document.getElementById(`results-status`);
+      if (!container || !emptyEl || !shellEl || !statusEl) return;
+
+      const filtered = getFilteredEntries();
+      const dayData = window.dayOsData;
+      const lessonNote = dayData && dayData.counts
+        ? ` · ${dayData.counts.lessons - dayData.counts.unrecorded_lessons}/${dayData.counts.lessons} lessons recorded`
+        : ``;
+      statusEl.textContent = `Showing ${filtered.length} of ${PORTFOLIO_ENTRIES.length} entries${lessonNote} · Click any row to expand definitions & fail-closed rules`;
+
+      if (filtered.length === 0) {
+        container.innerHTML = ``;
+        shellEl.hidden = true;
+        emptyEl.hidden = false;
+        return;
+      }
+
+      shellEl.hidden = false;
+      emptyEl.hidden = true;
+
+      container.innerHTML = filtered.map((entry) => {
+        const isExpanded = state.expandedIds.has(entry.id);
+        const isHighlighted = state.highlightedId === entry.id;
+        const toneClass = getToneClass(entry.evidenceTone);
+
+        return `
+          <article class="matrix-entry ${isExpanded ? `is-expanded` : ``} ${isHighlighted ? `is-highlighted` : ``}" id="entry-${escapeHtml(entry.id)}">
+            <button
+              type="button"
+              class="matrix-row-btn"
+              onclick="toggleExpand('${escapeHtml(entry.id)}')"
+              aria-expanded="${isExpanded ? `true` : `false`}"
+              aria-controls="detail-${escapeHtml(entry.id)}"
+            >
+              <div>
+                <span class="problem-title">${escapeHtml(entry.problemTitle)}</span>
+                <span class="problem-desc">${escapeHtml(entry.problemDesc)}</span>
+              </div>
+              <div>
+                <span class="tool-name">${escapeHtml(entry.toolName)}</span>
+                <span class="repo-slug">${escapeHtml(entry.repo)}</span>
+              </div>
+              <div>
+                <span class="tag">${escapeHtml(entry.primaryDomain)}</span>
+              </div>
+              <div>
+                <span class="gate-summary">${escapeHtml(entry.gateSummary)}</span>
+              </div>
+              <div class="evidence-cell">
+                <span>${escapeHtml(entry.evidenceMetric)}</span>
+                <span class="tag ${toneClass}">${escapeHtml(entry.evidenceBadge)}</span>
+              </div>
+              <div class="expand-chevron" aria-hidden="true">
+                <i data-lucide="chevron-down" width="18" height="18"></i>
+              </div>
+            </button>
+
+            <div class="matrix-detail" id="detail-${escapeHtml(entry.id)}" ${isExpanded ? `` : `hidden`}>
+              <div class="detail-block">
+                <div class="detail-block-title">
+                  <i data-lucide="book-open" width="14" height="14" aria-hidden="true"></i>
+                  Term Definitions
+                </div>
+                <dl style="margin: 0; display: flex; flex-direction: column; gap: var(--space-sm);">
+                  ${entry.terms.map((t) => `
+                    <div class="term-card">
+                      <dt>${escapeHtml(t.term)}</dt>
+                      <dd>${escapeHtml(t.def)}</dd>
+                    </div>
+                  `).join(``)}
+                </dl>
+              </div>
+
+              <div class="detail-block">
+                <div class="detail-block-title">
+                  <i data-lucide="folder-git-2" width="14" height="14" aria-hidden="true"></i>
+                  Repository Context
+                </div>
+                <ul class="context-list">
+                  ${entry.repoContext.map((c) => `
+                    <li>
+                      <span class="context-key">${escapeHtml(c.k)}</span>
+                      <span>${escapeHtml(c.v)}</span>
+                    </li>
+                  `).join(``)}
+                </ul>
+                <div>
+                  <span class="context-key">Run / Preflight Commands</span>
+                  <div class="cli-box">${escapeHtml(entry.cli)}</div>
+                  ${entry.liveUrl ? `<p><a class="glossary-link-btn" href="${escapeHtml(entry.liveUrl)}" target="_blank" rel="noopener">Open live service →</a></p>` : ``}
+                </div>
+              </div>
+
+              <div class="detail-block">
+                <div class="detail-block-title">
+                  <i data-lucide="shield-alert" width="14" height="14" aria-hidden="true"></i>
+                  Fail-Closed Safety Mechanics
+                </div>
+                <ul class="safety-list">
+                  ${entry.safetyMechanics.map((m) => `<li>${escapeHtml(m)}</li>`).join(``)}
+                </ul>
+              </div>
+
+              <div class="detail-footer-tags">
+                <div class="tag-row">
+                  <span class="mono-label" style="align-self: center; margin-right: var(--space-xs);">Domains:</span>
+                  ${entry.domains.map((d) => `<span class="tag tag-neutral">${escapeHtml(d)}</span>`).join(``)}
+                </div>
+                <span class="mono-label">${escapeHtml(entry.stageLabel)}</span>
+              </div>
+            </div>
+          </article>
+        `;
+      }).join(``);
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function updateTabCounts() {
+      const counts = {
+        All: PORTFOLIO_ENTRIES.length,
+        'Workforce Management': PORTFOLIO_ENTRIES.filter((e) => e.domains.includes(`Workforce Management`)).length,
+        'Governance & Audit': PORTFOLIO_ENTRIES.filter((e) => e.domains.includes(`Governance & Audit`)).length,
+        'AI Runtimes': PORTFOLIO_ENTRIES.filter((e) => e.domains.includes(`AI Runtimes`)).length,
+        'Tech Stack': PORTFOLIO_ENTRIES.filter((e) => e.domains.includes(`Tech Stack`)).length
+      };
+
+      const elAll = document.getElementById(`count-all`);
+      const elWfm = document.getElementById(`count-wfm`);
+      const elGov = document.getElementById(`count-gov`);
+      const elAi = document.getElementById(`count-ai`);
+      const elTech = document.getElementById(`count-tech`);
+
+      if (elAll) elAll.textContent = counts.All;
+      if (elWfm) elWfm.textContent = counts[`Workforce Management`];
+      if (elGov) elGov.textContent = counts[`Governance & Audit`];
+      if (elAi) elAi.textContent = counts[`AI Runtimes`];
+      if (elTech) elTech.textContent = counts[`Tech Stack`];
+    }
+
+    function setDomainFilter(domain) {
+      state.domain = domain;
+      const buttons = document.querySelectorAll(`.domain-tabs .tab-btn`);
+      buttons.forEach((btn) => {
+        const active = btn.dataset.domain === domain;
+        btn.classList.toggle(`is-active`, active);
+        btn.setAttribute(`aria-selected`, active ? `true` : `false`);
+      });
+      renderMatrix();
+      if (typeof window.onDomainChange === `function`) window.onDomainChange(domain);
+    }
+
+    function setStageFilter(stage) {
+      state.stage = stage;
+      renderMatrix();
+    }
+
+    function handleSearchInput(val) {
+      state.search = val;
+      const clearBtn = document.getElementById(`clear-search-btn`);
+      if (clearBtn) {
+        clearBtn.hidden = val.length === 0;
+      }
+      renderMatrix();
+    }
+
+    function clearSearch() {
+      state.search = ``;
+      const input = document.getElementById(`matrix-search`);
+      const clearBtn = document.getElementById(`clear-search-btn`);
+      if (input) {
+        input.value = ``;
+        input.focus();
+      }
+      if (clearBtn) clearBtn.hidden = true;
+      renderMatrix();
+    }
+
+    function toggleExpand(id) {
+      if (state.expandedIds.has(id)) {
+        state.expandedIds.delete(id);
+      } else {
+        state.expandedIds.add(id);
+      }
+      renderMatrix();
+    }
+
+    function expandAllVisible() {
+      const visible = getFilteredEntries();
+      visible.forEach((e) => state.expandedIds.add(e.id));
+      renderMatrix();
+    }
+
+    function collapseAll() {
+      state.expandedIds.clear();
+      renderMatrix();
+    }
+
+    function resetAllFilters() {
+      state.domain = `All`;
+      state.stage = `All`;
+      state.search = ``;
+      const input = document.getElementById(`matrix-search`);
+      const stageEl = document.getElementById(`stage-filter`);
+      const clearBtn = document.getElementById(`clear-search-btn`);
+      if (input) input.value = ``;
+      if (stageEl) stageEl.value = `All`;
+      if (clearBtn) clearBtn.hidden = true;
+      setDomainFilter(`All`);
+    }
+
+    function focusTool(id) {
+      state.domain = `All`;
+      state.stage = `All`;
+      state.search = ``;
+      const input = document.getElementById(`matrix-search`);
+      const stageEl = document.getElementById(`stage-filter`);
+      const clearBtn = document.getElementById(`clear-search-btn`);
+      if (input) input.value = ``;
+      if (stageEl) stageEl.value = `All`;
+      if (clearBtn) clearBtn.hidden = true;
+
+      const buttons = document.querySelectorAll(`.domain-tabs .tab-btn`);
+      buttons.forEach((btn) => {
+        const active = btn.dataset.domain === `All`;
+        btn.classList.toggle(`is-active`, active);
+        btn.setAttribute(`aria-selected`, active ? `true` : `false`);
+      });
+
+      state.expandedIds.add(id);
+      state.highlightedId = id;
+      renderMatrix();
+
+      const target = document.getElementById(`entry-${id}`);
+      if (target) {
+        target.scrollIntoView({ behavior: `smooth`, block: `center` });
+      }
+    }
+
+    function renderSymptoms() {
+      const listEl = document.getElementById(`symptom-list`);
+      const outputEl = document.getElementById(`diagnostic-output`);
+      if (!listEl || !outputEl) return;
+
+      listEl.innerHTML = FLOOR_SYMPTOMS.map((sym) => {
+        const active = sym.id === state.selectedSymptomId;
+        return `
+          <button
+            type="button"
+            class="symptom-btn ${active ? `is-active` : ``}"
+            onclick="selectSymptom('${escapeHtml(sym.id)}')"
+            role="option"
+            aria-selected="${active ? `true` : `false`}"
+          >
+            <span>${escapeHtml(sym.label)}</span>
+            <i data-lucide="chevron-right" width="15" height="15" aria-hidden="true"></i>
+          </button>
+        `;
+      }).join(``);
+
+      const selected = FLOOR_SYMPTOMS.find((s) => s.id === state.selectedSymptomId) || FLOOR_SYMPTOMS[0];
+      const entry = PORTFOLIO_ENTRIES.find((e) => e.id === selected.entryId);
+
+      outputEl.innerHTML = `
+        <div class="flow-step">
+          <span class="mono-label">1. Operational Floor Friction</span>
+          <p>${escapeHtml(selected.friction)}</p>
+        </div>
+        <div class="flow-step step-gate">
+          <span class="mono-label">2. Mapped Tool &amp; Fail-Closed Gate (${entry ? escapeHtml(entry.toolName) : ``})</span>
+          <p>${escapeHtml(selected.gate)}</p>
+        </div>
+        <div class="flow-step step-outcome">
+          <span class="mono-label">3. Verified Outcome / Lineage</span>
+          <p>${escapeHtml(selected.outcome)}</p>
+        </div>
+      `;
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function selectSymptom(symId) {
+      state.selectedSymptomId = symId;
+      renderSymptoms();
+    }
+
+    function jumpToDiagnosticEntry() {
+      const selected = FLOOR_SYMPTOMS.find((s) => s.id === state.selectedSymptomId);
+      if (selected) {
+        focusTool(selected.entryId);
+      }
+    }
+
+    function renderGlossary() {
+      const listEl = document.getElementById(`glossary-list`);
+      if (!listEl) return;
+
+      listEl.innerHTML = GLOSSARY_TERMS.map((item) => `
+        <div class="glossary-item">
+          <div class="glossary-head">
+            <span class="glossary-term">${escapeHtml(item.term)}</span>
+            <a class="glossary-link-btn" href="/lessons/${encodeURI(item.lesson || ``)}">Open lesson →</a>
+            <a class="glossary-link-btn" href="/record/${encodeURI(item.lesson || ``)}">Write answer →</a>
+          </div>
+          <p class="glossary-def">${escapeHtml(item.def)}</p>
+        </div>
+      `).join(``);
+    }
+
+    function renderCoverageChart() {
+      const canvas = document.getElementById(`coverageChart`);
+      if (!canvas || typeof Chart === `undefined`) return;
+
+      const styles = getComputedStyle(document.documentElement);
+      const primaryColor = styles.getPropertyValue(`--data-1`).trim();
+      const contextColor = styles.getPropertyValue(`--data-context`).trim();
+      const gridColor = styles.getPropertyValue(`--outline-variant`).trim();
+      const baselineColor = styles.getPropertyValue(`--outline`).trim();
+      const labelColor = styles.getPropertyValue(`--on-surface-variant`).trim();
+      const textColor = styles.getPropertyValue(`--on-surface`).trim();
+      const bgColor = styles.getPropertyValue(`--background`).trim();
+
+      const chartData = [
+        { label: `Helix Prime (v0.9.0)`, value: 2107, lesson: `0001-fail-closed-gates.html`, note: `Synthetic fixtures · CI green` },
+        { label: `Study Studio (v0.2.1)`, value: 986, lesson: `0011-local-first-ai.html`, note: `85.66% stmts · 28/28 mutations` },
+        { label: `Helix Education (v2.1.1)`, value: 465, lesson: `0002-event-sourcing-vs-logging.html`, note: `Python 3.11–3.13 CI matrix` },
+        { label: `SigmaHelix-OS (v1.0.0)`, value: 385, lesson: `0005-sealed-key-store.html`, note: `72% coverage · CI green` },
+        { label: `Blue Waves (v0.3.0)`, value: 167, lesson: `0023-ci-sbom-trivy.html`, note: `151 project + 16 vendored` },
+        { label: `Signoff (v0.1.0)`, value: 140, lesson: `0006-hash-chained-ledger.html`, note: `88% coverage · 100% offline` },
+        { label: `RAG Work Sample`, value: 105, lesson: `0009-rag-confidence-gate.html`, note: `36-case eval · 0 unsupported` }
+      ];
+
+      new Chart(canvas.getContext(`2d`), {
+        type: `bar`,
+        data: {
+          labels: chartData.map((d) => d.label),
+          datasets: [{
+            label: `Passing automated tests`,
+            data: chartData.map((d) => d.value),
+            backgroundColor: chartData.map((_, idx) => idx === 0 ? primaryColor : contextColor),
+            borderRadius: 0,
+            barPercentage: 0.72,
+            categoryPercentage: 0.85
+          }]
+        },
+        options: {
+          onClick: function (evt, elements) {
+            if (!elements.length) return;
+            const row = chartData[elements[0].index];
+            if (row && row.lesson) window.location.href = `/lessons/${row.lesson}`;
+          },
+          onHover: function (evt, elements) {
+            const target = evt.native && evt.native.target;
+            if (target) target.style.cursor = elements.length ? `pointer` : `default`;
+          },
+          indexAxis: `y`,
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            },
+            tooltip: {
+              backgroundColor: bgColor,
+              titleColor: textColor,
+              bodyColor: textColor,
+              borderColor: baselineColor,
+              borderWidth: 1,
+              cornerRadius: 0,
+              titleFont: { family: `IBM Plex Sans`, weight: `600`, size: 12 },
+              bodyFont: { family: `IBM Plex Mono`, size: 12 },
+              callbacks: {
+                afterLabel: function(ctx) {
+                  const row = chartData[ctx.dataIndex];
+                  return row ? row.note : ``;
+                }
+              }
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: {
+                color: gridColor,
+                tickLength: 0
+              },
+              border: {
+                color: baselineColor
+              },
+              ticks: {
+                color: labelColor,
+                font: { family: `IBM Plex Mono`, size: 11 }
+              },
+              title: {
+                display: true,
+                text: `PASSING AUTOMATED TESTS (COUNT)`,
+                color: labelColor,
+                font: { family: `IBM Plex Mono`, size: 11 }
+              }
+            },
+            y: {
+              grid: {
+                display: false
+              },
+              border: {
+                color: baselineColor
+              },
+              ticks: {
+                color: textColor,
+                font: { family: `IBM Plex Sans`, size: 12 }
+              }
+            }
+          }
+        }
+      });
+    }
+
+    document.addEventListener(`DOMContentLoaded`, function() {
+      updateTabCounts();
+      renderMatrix();
+      renderSymptoms();
+      renderGlossary();
+      renderCoverageChart();
+      if (typeof window.initDayOs === "function") window.initDayOs();
+
+      if (window.lucide && typeof window.lucide.createIcons === `function`) {
+        window.lucide.createIcons();
+      }
+    });
+  </script>
+  <script src="cockpit/day-os.js"></script>
+
+  <!-- SAMI: voice companion + metacognitive memory -->
+  <section class="sami-panel" id="sami-panel" hidden aria-label="Sami voice companion">
+    <div class="sami-head">
+      <div><strong>✦ Sami</strong><small>voice companion · metacognitive memory</small></div>
+      <button type="button" id="sami-voice" title="Toggle my voice">🔊</button>
+      <button type="button" id="sami-close" title="Close">✕</button>
+    </div>
+    <div class="sami-tabbar">
+      <button type="button" class="on" data-tab="chat">Talk</button>
+      <button type="button" data-tab="memory">Memory &amp; recommendations</button>
+    </div>
+    <div id="sami-chat-view" class="sami-messages" aria-live="polite"></div>
+    <div id="sami-memory-view" class="sami-scroll" hidden></div>
+    <div class="sami-chips" id="sami-chips">
+      <button type="button" data-q="What's missing in this OS?">What's missing?</button>
+      <button type="button" data-q="Are we giving Hatem all the ADHD settings?">ADHD settings</button>
+      <button type="button" data-q="How can we design lessons even better?">Better lessons</button>
+      <button type="button" data-q="Where is the glossary?">Find a file</button>
+      <button type="button" data-q="Recommend a next step">Recommend</button>
+    </div>
+    <p class="sami-status" id="sami-status">Ready. Voice on — allow the microphone when your browser asks.</p>
+    <form class="sami-input" id="sami-form">
+      <input id="sami-text" autocomplete="off" placeholder="Ask me anything about the app, your projects, or your journey…">
+      <button type="button" class="sami-mic" id="sami-mic" title="Speak">🎙</button>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  <button type="button" class="exit-focus" id="exit-focus" hidden>Exit focus mode</button>
+  <script src="cockpit/shell.js"></script>
+  <script src="cockpit/sami.js"></script>
+</body>
+</html>

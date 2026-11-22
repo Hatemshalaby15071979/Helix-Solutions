@@ -1,0 +1,661 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Helix Solutions is the company behind Helix Codex. Founded by Hatem Shalaby, Contact Centre Operations and AI Implementation Lead, it builds governed operations software that runs on your hardware.">
+  <title>Helix Solutions. The operations core, built to be owned.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500&family=Atkinson+Hyperlegible+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+  <link href="./style.css" rel="stylesheet">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- NAV -->
+  <header class="nav" role="banner">
+    <div class="container nav__inner">
+      <a href="/" class="nav__wordmark" aria-label="Helix Solutions home">
+        <img src="./assets/helix-solutions-logo.svg" alt="" width="24" height="24" aria-hidden="true" style="display:block">
+        <svg class="nav__mark" viewBox="100 35 103 145" width="24" height="34" aria-hidden="true">
+          <path d="M155.49 46.94 L192.94 120.43 L110.57 116.12 Z" stroke="#C9A44F" stroke-width="5.25" stroke-linejoin="round" fill="none"/>
+          <circle cx="153" cy="154.49" r="18" stroke="#C9A44F" stroke-width="4.5" fill="none"/>
+          <circle cx="153" cy="154.49" r="6.75" fill="#F5F1E6"/>
+        </svg>
+        <span>Helix <b>Solutions</b></span>
+      </a>
+      <nav class="nav__links" aria-label="Page sections">
+        <a href="#explore">Explore</a>
+        <a href="#about">Hatem</a>
+        <a href="#films">Films</a>
+        <a href="#work">Work</a>
+        <a href="#how">How it works</a>
+        <a href="#proof">Proof</a>
+        <a href="#repos">All repos</a>
+      </nav>
+      <div class="nav__actions">
+        <a class="btn btn--quiet" href="#about">Talk to Hatem</a>
+        <a class="btn" href="https://github.com/Hatemshalaby15071979/Helix-Codex" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" aria-labelledby="hero-head">
+      <img src="./assets/codex-peak.svg" alt="" class="hero__bg-artifact" aria-hidden="true">
+      <div class="container hero__grid">
+        <div class="hero__text">
+          <h1 id="hero-head">The operations system you own.</h1>
+          <div class="hero__actions">
+            <a class="btn" href="https://github.com/Hatemshalaby15071979/Helix-Codex" rel="noopener">See the code</a>
+            <a class="btn btn--quiet" href="#work">What is built</a>
+          </div>
+        </div>
+        <div class="hero__visual" data-reveal>
+          <div class="audit-trail" role="img" aria-label="An audit trail showing a governed workflow: a request submitted by a manager, checked by a governance gate, approved by a second reviewer, executed by an engine, and recorded with a correlation id. The system denies the action when a control cannot be checked.">
+            <div class="audit-trail__head">
+              <span class="audit-trail__label">Audit trail</span>
+              <span class="audit-trail__id">correlation id 0x4a7f</span>
+            </div>
+            <ol class="audit-trail__steps">
+              <li class="audit-trail__step is-done">
+                <span class="step-dot"></span>
+                <span class="step-who">SUBY</span>
+                <span class="step-what">submit request</span>
+                <span class="step-when">09:41</span>
+              </li>
+              <li class="audit-trail__step is-done">
+                <span class="step-dot"></span>
+                <span class="step-who">gate</span>
+                <span class="step-what">checks pass</span>
+                <span class="step-when">09:41</span>
+              </li>
+              <li class="audit-trail__step is-done">
+                <span class="step-dot"></span>
+                <span class="step-who">ANDY</span>
+                <span class="step-what">approves, reasons logged</span>
+                <span class="step-when">09:44</span>
+              </li>
+              <li class="audit-trail__step is-active">
+                <span class="step-dot"></span>
+                <span class="step-who">engine</span>
+                <span class="step-what">executes workflow</span>
+                <span class="step-when">09:44</span>
+              </li>
+              <li class="audit-trail__step is-denied">
+                <span class="step-dot"></span>
+                <span class="step-who">gate</span>
+                <span class="step-what">denied, control not verifiable</span>
+                <span class="step-when">09:45</span>
+              </li>
+            </ol>
+            <div class="audit-trail__foot">
+              <span class="audit-trail__status">fail closed</span>
+              <span class="audit-trail__note">Nothing executes without the approval it requires.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPLORE / MAP -->
+    <section class="section section--explore" id="explore" aria-labelledby="explore-head">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <h2 id="explore-head">Explore everything</h2>
+          <p class="lead">On your hardware. No cloud. Human approval.</p>
+        </div>
+        <div class="explore-grid" data-reveal style="--i:1">
+          <a class="explore-tile" href="#about">
+            <h3>Hatem Shalaby</h3>
+            <p>Contact Centre Operations and AI Implementation Lead.</p>
+          </a>
+          <a class="explore-tile" href="#films">
+            <h3>Notebook films</h3>
+            <p>Shadow-Mode Pilot Partner (EN). الذكاء الاصطناعي المنضبط (AR).</p>
+          </a>
+          <a class="explore-tile" href="#work">
+            <h3>What is built</h3>
+            <p>Six engines, nine roles.</p>
+          </a>
+          <a class="explore-tile" href="#how">
+            <h3>How it works</h3>
+            <p>Submit, Gate, Approve, Execute, Audit.</p>
+          </a>
+          <a class="explore-tile" href="#proof">
+            <h3>Proof, with dates</h3>
+            <p>2,107 passed (2026-11-05). NOT_READY, nine gates red.</p>
+          </a>
+        </div>
+
+        <div class="explore-projects" data-reveal style="--i:2">
+          <div class="explore-projects__head">
+            <h3>Projects orbiting the core</h3>
+          </div>
+          <div class="explore-projects__map">
+            <div class="orbit orbit--map" aria-label="Helix project ecosystem map">
+              <img src="./assets/codex-peak.svg" alt="Helix Codex geometry artifact with orbiting project elements" class="orbit__artifact">
+              <div class="orbit__ring" aria-hidden="true"></div>
+              <button type="button" class="orbit__core" data-project="helix-prime">
+                <span>Master project</span>
+                <strong>Helix Prime</strong>
+              </button>
+              <button type="button" class="orbit__node orbit__node--a" data-project="helix-education">Helix Education</button>
+              <button type="button" class="orbit__node orbit__node--b" data-project="study-studio">Study Studio</button>
+              <button type="button" class="orbit__node orbit__node--c" data-project="signoff">Signoff</button>
+              <button type="button" class="orbit__node orbit__node--d" data-project="ld-command-center">L&amp;D Command Center</button>
+              <button type="button" class="orbit__node orbit__node--e" data-project="compliproof">CompliProof</button>
+              <button type="button" class="orbit__node orbit__node--f" data-project="sigmahelix">SigmaHelix</button>
+              <button type="button" class="orbit__node orbit__node--g" data-project="createlee">CreateLee</button>
+              <button type="button" class="orbit__node orbit__node--h" data-project="assay">Assay</button>
+              <button type="button" class="orbit__node orbit__node--i" data-project="mannschaft">Mannschaft</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ABOUT -->
+    <section class="section" id="about" aria-labelledby="about-head">
+      <div class="container">
+        <div class="about-layout" data-reveal>
+          <div class="about-body">
+            <h2 id="about-head">Hatem Shalaby</h2>
+            <p class="lead">Contact Centre Operations and AI Implementation Lead focused on WFM and CX Transformation. Builds from the operating floor up: prototypes, not production claims.</p>
+            <div class="about__links">
+              <a href="https://github.com/Hatemshalaby15071979" rel="noopener">GitHub portfolio</a>
+              <button type="button" class="link-btn" data-project="helix-prime">Helix Prime project page</button>
+            </div>
+          </div>
+          <div class="about-ecosystem" data-reveal style="--i:1">
+            <p class="ecosystem__label">Orbiting projects</p>
+            <div class="orbit" aria-label="Helix project ecosystem">
+              <img src="./assets/codex-peak.svg" alt="Helix Codex geometry artifact with orbiting project elements" class="orbit__artifact">
+              <div class="orbit__ring" aria-hidden="true"></div>
+              <button type="button" class="orbit__core" data-project="helix-prime">
+                <span>Master project</span>
+                <strong>Helix Prime</strong>
+              </button>
+              <button type="button" class="orbit__node orbit__node--a" data-project="helix-education">Helix Education</button>
+              <button type="button" class="orbit__node orbit__node--b" data-project="study-studio">Study Studio</button>
+              <button type="button" class="orbit__node orbit__node--c" data-project="signoff">Signoff</button>
+              <button type="button" class="orbit__node orbit__node--d" data-project="ld-command-center">L&amp;D Command Center</button>
+              <button type="button" class="orbit__node orbit__node--e" data-project="compliproof">CompliProof</button>
+              <button type="button" class="orbit__node orbit__node--f" data-project="sigmahelix">SigmaHelix</button>
+              <button type="button" class="orbit__node orbit__node--g" data-project="createlee">CreateLee</button>
+              <button type="button" class="orbit__node orbit__node--h" data-project="assay">Assay</button>
+              <button type="button" class="orbit__node orbit__node--i" data-project="mannschaft">Mannschaft</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- FILMS -->
+    <section class="section" id="films" aria-labelledby="films-head">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <h2 id="films-head">Notebook films</h2>
+        </div>
+        <div class="films" data-reveal style="--i:1">
+          <article class="film">
+            <div class="film__frame">
+              <video controls playsinline preload="metadata" poster="./assets/poster-shadow.png">
+                <source src="./assets/Shadow-Mode_Pilot_Partner.mp4" type="video/mp4">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="film__meta">
+              <h3>Shadow-Mode Pilot Partner</h3>
+              <p class="film__lang">EN</p>
+            </div>
+          </article>
+          <article class="film">
+            <div class="film__frame">
+              <video controls playsinline preload="metadata" poster="./assets/poster-arabic.png">
+                <source src="./assets/الذكاء_الاصطناعي_المنضبط.mp4" type="video/mp4">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+            <div class="film__meta">
+              <h3 lang="ar">الذكاء الاصطناعي المنضبط</h3>
+              <p class="film__lang">AR</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORK -->
+    <section class="section" id="work" aria-labelledby="work-head">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <h2 id="work-head">What is built</h2>
+          <p class="lead">Six engines, nine roles, each with defined limits.</p>
+        </div>
+        <div class="engines" data-reveal style="--i:1">
+          <div class="engines__row">
+            <h3>Workforce Planner</h3>
+            <span class="engine__code sr-only">WFM</span>
+            <p>Staffing forecasts: who you need, when.</p>
+          </div>
+          <div class="engines__row">
+            <h3>Floor Watch</h3>
+            <span class="engine__code sr-only">RTA</span>
+            <p>Live adherence: schedule against the floor.</p>
+          </div>
+          <div class="engines__row">
+            <h3>Client Pulse</h3>
+            <span class="engine__code sr-only">CX</span>
+            <p>Warns weeks ahead of client churn.</p>
+          </div>
+          <div class="engines__row">
+            <h3>Client Onboarding</h3>
+            <span class="engine__code sr-only">B2B</span>
+            <p>Client details to a launch plan in seconds.</p>
+          </div>
+          <div class="engines__row">
+            <h3>Talent Pipeline</h3>
+            <span class="engine__code sr-only">Personnel</span>
+            <p>Hiring pipeline for tomorrow&rsquo;s gaps, not yesterday&rsquo;s panic.</p>
+          </div>
+          <div class="engines__row">
+            <h3>Customer Hub</h3>
+            <span class="engine__code sr-only">CRM</span>
+            <p>Pipeline and records, in one place.</p>
+          </div>
+        </div>
+        <div class="agents" data-reveal style="--i:2">
+          <div class="agents__grid">
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="var(--color-ink)"/><circle cx="26" cy="16" r="2" fill="var(--color-ink)"/><path d="M13 25c2 3 12 3 14 0" fill="none" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>SAMI</b><span class="sr-only">, Coordinator. </span><p class="agent__persona">Connects teams.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><rect x="6" y="6" width="28" height="28" rx="8" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="var(--color-ink)"/><circle cx="26" cy="16" r="2" fill="var(--color-ink)"/><path d="M14 26h12" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>SUBY</b><span class="sr-only">, Operations. </span><p class="agent__persona">Steers operations.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="var(--color-ink)"/><circle cx="26" cy="16" r="2" fill="var(--color-ink)"/><path d="M14 24c2 2 10 2 12 0" fill="none" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="28" r="1.5" fill="var(--color-accent)"/></svg></div>
+              <div class="agent__body"><b>PHILI</b><span class="sr-only">, People. </span><p class="agent__persona">Champions people.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="var(--color-ink)"/><circle cx="26" cy="16" r="2" fill="var(--color-ink)"/><path d="M13 25c3 2 11 2 14 0" fill="none" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/><path d="M20 8v4" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>WILI</b><span class="sr-only">, Learning. </span><p class="agent__persona">Grows skills.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 4l4 8 9 1-6.5 6.5 1.5 9L20 24l-8 4.5 1.5-9L7 13l9-1z" fill="none" stroke="var(--color-accent)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="17" cy="17" r="1.5" fill="var(--color-ink)"/><circle cx="23" cy="17" r="1.5" fill="var(--color-ink)"/></svg></div>
+              <div class="agent__body"><b>MAYA</b><span class="sr-only">, Marketing. </span><p class="agent__persona">Shapes stories.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="var(--color-ink)"/><circle cx="26" cy="16" r="2" fill="var(--color-ink)"/><path d="M14 25c2 3 10 3 12 0" fill="none" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/><path d="M28 10l4-4" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>LIZA</b><span class="sr-only">, Sales. </span><p class="agent__persona">Builds trust.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><path d="M20 4l14 7v8c0 8-6 14-14 17C12 33 6 27 6 19v-8z" fill="none" stroke="var(--color-accent)" stroke-width="1.5" stroke-linejoin="round"/><circle cx="15" cy="17" r="1.5" fill="var(--color-ink)"/><circle cx="25" cy="17" r="1.5" fill="var(--color-ink)"/><path d="M15 24h10" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>ANDY</b><span class="sr-only">, Quality. </span><p class="agent__persona">Sets standards.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><rect x="6" y="8" width="28" height="20" rx="4" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><path d="M14 32h12M20 28v4" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/><circle cx="15" cy="17" r="1.5" fill="var(--color-ink)"/><circle cx="25" cy="17" r="1.5" fill="var(--color-ink)"/><path d="M16 22h8" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>TOMY</b><span class="sr-only">, ICT. </span><p class="agent__persona">Readies systems.</p></div>
+            </article>
+            <article class="agent">
+              <div class="agent__avatar" aria-hidden="true"><svg viewBox="0 0 40 40" width="40" height="40"><circle cx="20" cy="20" r="18" fill="none" stroke="var(--color-accent)" stroke-width="1.5"/><circle cx="14" cy="16" r="2" fill="var(--color-ink)"/><circle cx="26" cy="16" r="2" fill="var(--color-ink)"/><path d="M14 25c2 2 10 2 12 0" fill="none" stroke="var(--color-cool)" stroke-width="1.5" stroke-linecap="round"/><path d="M20 10v3M10 20h3M27 20h3" stroke="var(--color-accent)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+              <div class="agent__body"><b>NONO</b><span class="sr-only">, Revenue. </span><p class="agent__persona">Tracks revenue.</p></div>
+            </article>
+          </div>
+          <p class="agents__note">Each with limits and an owner.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="section" id="how" aria-labelledby="how-head">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <h2 id="how-head">How it works</h2>
+          <p class="lead">Operational Control Plane: from request to recorded outcome.</p>
+        </div>
+
+        <div class="ocp-deck" data-reveal style="--i:1" aria-label="Helix Prime Operational Control Plane slides">
+          <div class="ocp-deck__viewport">
+            <img class="ocp-deck__image is-active" src="./assets/ocp/image1.png" alt="Helix Prime Operational Control Plane, slide 1" loading="eager" decoding="async">
+          </div>
+          <div class="ocp-deck__controls">
+            <button type="button" class="ocp-btn" data-ocp-prev aria-label="Previous slide"><span aria-hidden="true">←</span><span class="sr-only">Previous</span></button>
+            <div class="ocp-dots" role="tablist" aria-label="Slides">
+              <button type="button" class="ocp-dot is-active" data-ocp-dot="0" aria-label="Slide 1" aria-selected="true"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="1" aria-label="Slide 2" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="2" aria-label="Slide 3" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="3" aria-label="Slide 4" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="4" aria-label="Slide 5" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="5" aria-label="Slide 6" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="6" aria-label="Slide 7" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="7" aria-label="Slide 8" aria-selected="false"></button>
+              <button type="button" class="ocp-dot" data-ocp-dot="8" aria-label="Slide 9" aria-selected="false"></button>
+            </div>
+            <button type="button" class="ocp-btn" data-ocp-next aria-label="Next slide"><span aria-hidden="true">→</span><span class="sr-only">Next</span></button>
+          </div>
+        </div>
+
+        <div class="gov-rail" data-reveal style="--i:2">
+          <div class="gov-rail__track"><div class="gov-rail__pulse" aria-hidden="true"></div></div>
+          <ol class="gov-rail__steps">
+            <li>
+              <h3>Submit</h3>
+              <p>Manager raises request.</p>
+            </li>
+            <li>
+              <h3>Gate</h3>
+              <p>Unverifiable controls deny.</p>
+            </li>
+            <li>
+              <h3>Approve</h3>
+              <p>Second reviewer decides.</p>
+            </li>
+            <li>
+              <h3>Execute</h3>
+              <p>Runs with correlation id on every write.</p>
+            </li>
+            <li>
+              <h3>Audit</h3>
+              <p>Recorded in the trail.</p>
+            </li>
+          </ol>
+        </div>
+        <div class="gov-facts" data-reveal style="--i:3">
+          <div class="gov-facts__item">
+            <h3>Labelled data</h3>
+            <p>Synthetic and live data differ.</p>
+          </div>
+          <div class="gov-facts__item">
+            <h3>Nothing self-deploys</h3>
+            <p>Approval and rollback required.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROOF -->
+    <section class="section" id="proof" aria-labelledby="proof-head">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <h2 id="proof-head">Proof, with dates</h2>
+        </div>
+        <div class="proof-table" data-reveal style="--i:1">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Evidence</th>
+                <th scope="col">Value</th>
+                <th scope="col">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Full suite</td>
+                <td class="num">2,107 passed</td>
+                <td>2026-11-05</td>
+              </tr>
+              <tr>
+                <td>Engine readiness</td>
+                <td class="num">12/12 gates</td>
+                <td>2026-11-05</td>
+              </tr>
+              <tr>
+                <td>Simulated release</td>
+                <td class="num">SIMULATED_PRODUCTION_READY</td>
+                <td>2026-11-05</td>
+              </tr>
+              <tr>
+                <td>Production release</td>
+                <td class="num">NOT_READY, nine gates red</td>
+                <td>2026-11-05</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="proof-honest" data-reveal style="--i:2">
+          <h3>The honest boundary</h3>
+          <p>No external audit, no certification, no paying client. Live writes intentionally disabled. Simulation classification, not a production claim.</p>
+        </div>
+      </div>
+    </section>
+
+
+
+    <!-- EVERY GITHUB REPOSITORY -->
+    <section class="section" id="repos" aria-labelledby="repos-head">
+      <div class="container">
+        <div class="section__head" data-reveal>
+          <h2 id="repos-head">Every repository on GitHub</h2>
+          <p class="lead">The founder's complete public index — history, products, apps and dashboards. Thirteen repositories as of 22 November 2026.</p>
+        </div>
+        <div class="explore-grid" data-reveal style="--i:1">
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Hatemshalaby15071979" rel="noopener"><h3>Hatemshalaby15071979</h3><p>The profile and portfolio front door — founder history and the full public index.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Helix-Codex" rel="noopener"><h3>Helix-Codex</h3><p>Master project. Governed operations core: six engines, nine roles, fail-closed by design.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Assay" rel="noopener"><h3>Assay <span class="mono-label">new</span></h3><p>Offline sheet checks with a hash-chained report pack and a named human for every judgement call.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Mannschaft" rel="noopener"><h3>Mannschaft <span class="mono-label">new</span></h3><p>Listening-first German learning for A1–C2, local only, built for one learner.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/SigmaHelix-OS" rel="noopener"><h3>SigmaHelix-OS</h3><p>A personal operating system on your own machine — tasks, notes, projects and calendar.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Sign-off" rel="noopener"><h3>Sign-off</h3><p>Signed, offline evidence packs that answer how AI touched a customer's records.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/CompliProof" rel="noopener"><h3>CompliProof</h3><p>Reconciles two CSV exports by key into an HTML/PDF/CSV evidence pack.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/createlee" rel="noopener"><h3>CreateLee</h3><p>Synthetic Signoff-shaped fixtures to rehearse the evidence gate before client data.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Study-Studio" rel="noopener"><h3>Study-Studio</h3><p>A private local-first AI tutor: lessons, quizzes, glossaries and bilingual podcasts.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/Helix-Education" rel="noopener"><h3>Helix-Education</h3><p>Event-sourced learning engine with a replayable, sealed learner record.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/L-D-Command-Center" rel="noopener"><h3>L&amp;D Command Center</h3><p>Desktop learning and career workstation that runs on your laptop.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/live-support-assistant" rel="noopener"><h3>live-support-assistant</h3><p>Explainable local RAG prototype that escalates instead of guessing.</p></a>
+          <a class="explore-tile" href="https://github.com/Hatemshalaby15071979/work-samples" rel="noopener"><h3>work-samples</h3><p>Three self-contained exercises demonstrating the operations-to-software mapping.</p></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA BAND -->
+    <section class="band band--cta" aria-label="Get in touch">
+      <img src="./assets/codex-peak.svg" alt="" class="band__artifact" aria-hidden="true">
+      <div class="container band__inner">
+        <p class="band__line">Code is open. Data stays with you. A human is always in charge.</p>
+        <div class="band__actions">
+          <a class="btn" href="https://github.com/Hatemshalaby15071979/Helix-Codex" rel="noopener">Read the code</a>
+          <a class="btn btn--quiet" href="#about">Talk to Hatem</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" role="contentinfo">
+    <img src="./assets/codex-peak.svg" alt="" class="footer__artifact" aria-hidden="true">
+    <div class="container footer__inner">
+      <div class="footer__wordmark">
+        <img src="./assets/helix-solutions-logo.svg" alt="" width="28" height="28" aria-hidden="true" style="display:block">
+        <svg class="footer__mark" viewBox="100 35 103 145" width="28" height="40" aria-hidden="true">
+          <path d="M155.49 46.94 L192.94 120.43 L110.57 116.12 Z" stroke="#C9A44F" stroke-width="5.25" stroke-linejoin="round" fill="none"/>
+          <circle cx="153" cy="154.49" r="18" stroke="#C9A44F" stroke-width="4.5" fill="none"/>
+          <circle cx="153" cy="154.49" r="6.75" fill="#F5F1E6"/>
+        </svg>
+        <span>Helix Solutions</span>
+      </div>
+      <div class="footer__cols">
+        <div class="footer__col">
+          <span class="footer__label">Work</span>
+          <a href="#work">Engines</a>
+          <a href="#how">Governance</a>
+          <a href="#proof">Evidence</a>
+          <a href="#films">Films</a>
+        </div>
+        <div class="footer__col">
+          <span class="footer__label">About</span>
+          <a href="#about">Hatem Shalaby</a>
+          <a href="https://github.com/Hatemshalaby15071979" rel="noopener">GitHub</a>
+        </div>
+        <div class="footer__col">
+          <span class="footer__label">Projects</span>
+          <button type="button" class="footer__link-btn" data-project="helix-prime">Helix Prime</button>
+          <button type="button" class="footer__link-btn" data-project="helix-education">Helix Education</button>
+          <button type="button" class="footer__link-btn" data-project="study-studio">Study Studio</button>
+          <button type="button" class="footer__link-btn" data-project="signoff">Signoff</button>
+          <button type="button" class="footer__link-btn" data-project="ld-command-center">L&amp;D Command Center</button>
+          <button type="button" class="footer__link-btn" data-project="compliproof">CompliProof</button>
+          <button type="button" class="footer__link-btn" data-project="sigmahelix">SigmaHelix</button>
+          <button type="button" class="footer__link-btn" data-project="createlee">CreateLee</button>
+          <button type="button" class="footer__link-btn" data-project="assay">Assay</button>
+          <button type="button" class="footer__link-btn" data-project="mannschaft">Mannschaft</button>
+        </div>
+      </div>
+      <p class="footer__legal">Hatem Shalaby, founder. Contact Centre Operations and AI Implementation Lead.</p>
+    </div>
+  </footer>
+
+  <!-- Slots -->
+  <script>window.hallmarkSlots = (m) => { for (const [k, v] of Object.entries(m)) { const s = document.querySelector(`[data-slot="${k}"]`); if (!s) continue; const im = new Image(); im.src = typeof v === 'string' ? v : v.src; im.alt = (typeof v === 'object' && v.alt) || s.dataset.alt || ''; s.querySelectorAll(':scope > img').forEach((o) => o.remove()); s.prepend(im); } };
+  document.querySelectorAll('[data-slot] img').forEach((i) => { if (i.complete && !i.naturalWidth) i.remove(); else i.addEventListener('error', () => i.remove(), { once: true }); });</script>
+
+  <!-- Project card -->
+  <div class="project-card" id="project-card" hidden>
+    <div class="project-card__backdrop" data-close-card></div>
+    <div class="project-card__panel" role="dialog" aria-modal="true" aria-labelledby="project-card-title">
+      <button type="button" class="project-card__close" data-close-card aria-label="Close project card">Close</button>
+      <p class="project-card__tag" id="project-card-tag"></p>
+      <h3 class="project-card__title" id="project-card-title"></h3>
+      <p class="project-card__intro" id="project-card-intro"></p>
+      <a class="btn project-card__link" id="project-card-link" href="#">Open project page</a>
+    </div>
+  </div>
+
+  <!-- Reveal -->
+  <script>
+  const io = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+  }), { rootMargin: '0px 0px -10% 0px' });
+  document.querySelectorAll('[data-reveal]').forEach((el) => io.observe(el));
+  </script>
+
+  <!-- OCP deck -->
+  <script>
+  (() => {
+    const deck = document.querySelector('.ocp-deck');
+    if (!deck) return;
+    const img = deck.querySelector('.ocp-deck__image');
+    const dots = Array.from(deck.querySelectorAll('.ocp-dot'));
+    const prev = deck.querySelector('[data-ocp-prev]');
+    const next = deck.querySelector('[data-ocp-next]');
+    const slides = [
+      "./assets/ocp/image1.png",
+      "./assets/ocp/image2.png",
+      "./assets/ocp/image3.png",
+      "./assets/ocp/image4.png",
+      "./assets/ocp/image5.png",
+      "./assets/ocp/image6.png",
+      "./assets/ocp/image7.png",
+      "./assets/ocp/image8.png",
+      "./assets/ocp/image9.png"
+    ];
+    let index = 0;
+    let timer = null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    slides.forEach((src, i) => { if (i) { const im = new Image(); im.src = src; } });
+    function show(i, animate = true) {
+      index = (i + slides.length) % slides.length;
+      if (!img) return;
+      if (animate && !reduce) {
+        img.classList.add('is-changing');
+        window.setTimeout(() => {
+          img.src = slides[index];
+          img.alt = "Helix Prime Operational Control Plane, slide " + (index + 1);
+          img.classList.remove('is-changing');
+        }, 180);
+      } else {
+        img.src = slides[index];
+        img.alt = "Helix Prime Operational Control Plane, slide " + (index + 1);
+      }
+      dots.forEach((d, n) => {
+        const active = n === index;
+        d.classList.toggle('is-active', active);
+        d.setAttribute('aria-selected', active ? 'true' : 'false');
+      });
+    }
+    function start() {
+      if (reduce || timer) return;
+      timer = setInterval(() => show(index + 1), 4500);
+    }
+    function stop() {
+      if (timer) { clearInterval(timer); timer = null; }
+    }
+    if (prev) prev.addEventListener('click', () => { stop(); show(index - 1); start(); });
+    if (next) next.addEventListener('click', () => { stop(); show(index + 1); start(); });
+    dots.forEach((d) => d.addEventListener('click', () => { stop(); show(parseInt(d.dataset.ocpDot, 10) || 0); start(); }));
+    deck.addEventListener('mouseenter', stop);
+    deck.addEventListener('mouseleave', start);
+    deck.addEventListener('focusin', stop);
+    deck.addEventListener('focusout', (e) => { if (!deck.contains(e.relatedTarget)) start(); });
+    show(0, false);
+    start();
+  })();
+  </script>
+
+  <!-- Project cards -->
+  <script>
+  (() => {
+    const projects = {
+      "helix-prime": {name:"Helix Prime", tag:"Master project · AI operations team", intro:"Plans, monitors, and improves your business — with every big move reviewed and approved by a person first. Runs on your computer. No cloud required.", href:"../Helix_Prime.html"},
+      "helix-education": {name:"Helix Education", tag:"Alpha · Local-first · Released 2.1.1", intro:"A learning engine that keeps a learner's record as evidence — replayable, inspectable, and sealed so a quiz score can't be quietly changed.", href:"../index%20(2).html"},
+      "study-studio": {name:"Study Studio", tag:"Local-first · Private · Released 0.2.1", intro:"A private AI tutor: structured lessons, quizzes, glossaries, and bilingual podcasts, generated by an AI model on your own computer.", href:"../index%20(4).html"},
+      "signoff": {name:"Signoff", tag:"Evidence pack", intro:"Your client asks how AI touched their customers. You answer with a signed evidence pack, built offline on your own data, in days not weeks.", href:"../index%20(5).html"},
+      "ld-command-center": {name:"L&D Command Center", tag:"v1.0.0 — released", intro:"A desktop language school and career coach that runs on your laptop. Local-first, no cloud.", href:"../index%20(6).html"},
+      "compliproof": {name:"CompliProof", tag:"Local reconciliation & reporting", intro:"Reconciles two CSV exports by key and produces HTML, PDF and CSV reports with a local evidence pack and hash-chained audit trail.", href:"../index%20(7).html"},
+      "sigmahelix": {name:"SigmaHelix", tag:"Local-first personal OS · Released v1.0.0", intro:"A personal operating system on your own machine — tasks, notes, projects, calendar, and an assistant that helps manage your other projects.", href:"../index%20(8).html"},
+      "createlee": {name:"CreateLee", tag:"Signoff rehearsal library", intro:"A synthetic rehearsal library of Signoff-shaped CSV exports plus a validator, so you can rehearse the AI-evidence gate end to end before real client data arrives.", href:"../index%20(9).html"},
+      "assay": {name:"Assay", tag:"Staged preview · v0.4.0 · offline by construction", intro:"Checks a sheet against a plain-English template and produces a hash-chained report pack. Anything that needs a human eye is flagged PENDING-HUMAN and closed by a named person — the machine never guesses.", href:"https://github.com/Hatemshalaby15071979/Assay"},
+      "mannschaft": {name:"Mannschaft", tag:"V6 pilot · 12 A1–C2 lessons · local only", intro:"A quiet, listening-first German app for one learner. Twelve hand-authored lessons, six German voices, sentence cards and an offline PWA — all bound to 127.0.0.1.", href:"https://github.com/Hatemshalaby15071979/Mannschaft"}
+    };
+    const card = document.getElementById('project-card');
+    const title = document.getElementById('project-card-title');
+    const tag = document.getElementById('project-card-tag');
+    const intro = document.getElementById('project-card-intro');
+    const link = document.getElementById('project-card-link');
+    let lastFocus = null;
+    function openCard(id) {
+      const p = projects[id];
+      if (!p || !card) return;
+      lastFocus = document.activeElement;
+      title.textContent = p.name;
+      tag.textContent = p.tag || '';
+      intro.textContent = p.intro || '';
+      link.href = p.href;
+      link.setAttribute('aria-label', 'Open ' + p.name + ' project page');
+      card.hidden = false;
+      card.classList.add('is-open');
+      const close = card.querySelector('.project-card__close');
+      if (close) close.focus();
+    }
+    function closeCard() {
+      if (!card) return;
+      card.classList.remove('is-open');
+      card.hidden = true;
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    }
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('[data-project]');
+      if (trigger) {
+        e.preventDefault();
+        openCard(trigger.getAttribute('data-project'));
+        return;
+      }
+      if (e.target.closest('[data-close-card]')) {
+        e.preventDefault();
+        closeCard();
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && card && !card.hidden) closeCard();
+    });
+  })();
+  </script>
+</body>
+</html>

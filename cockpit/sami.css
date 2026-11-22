@@ -1,0 +1,62 @@
+/* Sami panel — voice companion and metacognitive memory. */
+
+.sami-panel {
+  position: fixed; z-index: 80; right: 1rem; bottom: 1rem;
+  width: min(26rem, calc(100vw - 2rem)); height: min(42rem, calc(100vh - 5rem));
+  display: flex; flex-direction: column; overflow: hidden;
+  border: 1px solid var(--outline-variant); border-radius: .6rem;
+  background: var(--background); color: var(--on-surface); box-shadow: var(--shadow-2);
+}
+.sami-panel[hidden] { display: none; }
+.sami-head {
+  display: flex; align-items: center; gap: .5rem; padding: .7rem .8rem;
+  background: linear-gradient(135deg, #6d5efc, #b14aff); color: #fff;
+}
+.sami-head strong { font-family: var(--font-headline); font-size: 1rem; }
+.sami-head small { font-size: .68rem; opacity: .85; display: block; }
+.sami-head button {
+  margin-left: auto; font: inherit; cursor: pointer; border: 0; border-radius: .25rem;
+  background: rgb(255 255 255 / .2); color: #fff; padding: .25rem .5rem;
+}
+.sami-messages { flex: 1; overflow-y: auto; padding: .8rem; display: grid; gap: .6rem; align-content: start; }
+.sami-msg { max-width: 92%; padding: .6rem .7rem; border-radius: .5rem; font-size: .86rem; line-height: 1.5; overflow-wrap: anywhere; }
+.sami-msg.me { justify-self: end; background: var(--primary-container); color: var(--on-primary-container); }
+.sami-msg.sami { justify-self: start; background: var(--surface-container-low); border: var(--rule); }
+.sami-msg.sami b { color: var(--primary); }
+.sami-msg ul { margin: .35rem 0 0; padding-left: 1.1rem; }
+.sami-msg li { margin: .15rem 0; }
+.sami-rec {
+  margin-top: .45rem; border: var(--rule); border-left: 3px solid var(--accent, #f2c14e);
+  border-radius: var(--rounded); padding: .5rem; background: var(--surface-container-low);
+  display: grid; gap: .3rem;
+}
+.sami-rec strong { font-size: .84rem; }
+.sami-rec p { margin: 0; font-size: .76rem; color: var(--on-surface-variant); }
+.sami-rec button { font: inherit; font-size: .74rem; cursor: pointer; padding: .3rem .5rem; border: var(--field-rule); border-radius: var(--rounded); background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.sami-rec.done { border-left-color: var(--positive); }
+.sami-rec.done button { background: var(--positive-container); color: var(--positive); border-color: var(--positive); cursor: default; }
+.sami-files { display: grid; gap: .25rem; margin-top: .35rem; }
+.sami-files a { font-size: .8rem; color: var(--primary); }
+.sami-files a span { display: block; font-size: .7rem; color: var(--on-surface-variant); }
+.sami-chips { display: flex; gap: .3rem; flex-wrap: wrap; padding: 0 .8rem .5rem; }
+.sami-chips button { font: inherit; font-size: .72rem; cursor: pointer; padding: .3rem .5rem; border: var(--field-rule); border-radius: 1rem; background: var(--background); color: var(--on-surface); }
+.sami-chips button:hover { border-color: var(--primary); }
+.sami-input { display: flex; gap: .4rem; padding: .6rem .8rem; border-top: var(--rule); align-items: center; }
+.sami-input input { flex: 1; font: inherit; font-size: .85rem; padding: .5rem .6rem; border: var(--field-rule); border-radius: var(--rounded); background: var(--background); color: var(--on-surface); }
+.sami-input button { font: inherit; cursor: pointer; padding: .5rem .6rem; border: var(--field-rule); border-radius: var(--rounded); background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.sami-input button.sami-mic { background: var(--background); color: var(--on-surface); }
+.sami-input button.sami-mic.listening { background: var(--error); color: #fff; border-color: var(--error); }
+.sami-status { font-family: var(--font-label); font-size: .62rem; color: var(--on-surface-variant); padding: 0 .8rem .5rem; }
+.sami-tabbar { display: flex; gap: .4rem; padding: .4rem .8rem; border-bottom: var(--rule); }
+.sami-tabbar button { font: inherit; font-size: .72rem; cursor: pointer; padding: .3rem .5rem; border: 0; background: none; color: var(--on-surface-variant); border-bottom: 2px solid transparent; }
+.sami-tabbar button.on { color: var(--primary); border-bottom-color: var(--primary); }
+.sami-panel .sami-scroll { overflow-y: auto; padding: .8rem; display: grid; gap: .5rem; align-content: start; }
+.sami-rec-full { border: var(--rule); border-left: 3px solid var(--accent, #f2c14e); border-radius: var(--rounded); padding: .6rem; background: var(--surface-container-low); display: grid; gap: .3rem; }
+.sami-rec-full h4 { margin: 0; font-size: .86rem; }
+.sami-rec-full p { margin: 0; font-size: .76rem; color: var(--on-surface-variant); }
+.sami-rec-full button { justify-self: start; font: inherit; font-size: .74rem; cursor: pointer; padding: .3rem .5rem; border: var(--field-rule); border-radius: var(--rounded); background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.sami-rec-full.done { border-left-color: var(--positive); }
+.sami-rec-full.done button { background: var(--positive-container); color: var(--positive); border-color: var(--positive); cursor: default; }
+.sami-decision { border-bottom: var(--rule); padding: .4rem 0; font-size: .78rem; }
+.sami-decision b { display: block; }
+.sami-decision small { color: var(--on-surface-variant); }

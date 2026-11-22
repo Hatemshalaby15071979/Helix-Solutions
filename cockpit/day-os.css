@@ -1,0 +1,96 @@
+.day-os {
+  border: var(--rule);
+  border-left: var(--primary-bar);
+  background: var(--background);
+  padding: var(--space-lg);
+  display: grid;
+  gap: var(--space-md);
+}
+.day-os h2 { margin: 0; }
+.day-os-meta, .day-os-note, .day-os-source {
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  color: var(--on-surface-variant);
+  margin: 0;
+}
+.prayer-row, .window-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+.prayer-chip, .task-card {
+  border: var(--rule);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--surface-container-low);
+}
+.prayer-chip strong { display: block; font-size: 1rem; }
+.prayer-chip.is-now { border-left: var(--primary-bar); background: var(--primary-container); }
+.now-card {
+  border: var(--rule);
+  border-left: var(--positive-bar);
+  padding: var(--space-md);
+  background: var(--positive-container);
+}
+.now-card h3 { margin: 0 0 var(--space-xs); font-size: var(--subhead-size); }
+.task-list { display: grid; gap: var(--space-sm); }
+.task-card { display: grid; gap: 0.35rem; }
+.task-card.is-now { border-left: var(--positive-bar); }
+.task-card.is-done { opacity: 0.72; }
+.task-card.is-blocked { border-left: var(--boundary-bar); }
+.task-actions, .add-row { display: flex; flex-wrap: wrap; gap: var(--space-sm); align-items: center; }
+.day-os button, .day-os select, .day-os input {
+  border: var(--field-rule);
+  background: var(--background);
+  color: var(--on-surface);
+  padding: 0.35rem 0.6rem;
+  border-radius: var(--rounded);
+}
+.day-os button { cursor: pointer; }
+.day-os button:disabled { cursor: not-allowed; opacity: 0.5; }
+.day-os .btn-done { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.day-banner {
+  border-left: var(--error-bar);
+  background: var(--error-container);
+  padding: var(--space-md);
+}
+.project-panel {
+  border: var(--rule);
+  padding: var(--space-md);
+  background: var(--surface-container);
+}
+.project-panel h3 { margin: 0 0 var(--space-xs); }
+.spaced-wrap { display: grid; gap: var(--space-sm); }
+.spaced-wrap h3 { margin: 0; }
+.term-grade { display: inline-flex; gap: .25rem; margin-left: .35rem; }
+.term-grade button, .prayer-chip button {
+  font: inherit; font-size: .68rem; cursor: pointer; padding: .15rem .4rem;
+  border: var(--field-rule); border-radius: var(--rounded);
+  background: var(--background); color: var(--on-surface);
+}
+.term-grade button:hover, .prayer-chip button:hover { border-color: var(--primary); }
+.day-os-lessons-wrap { display: grid; gap: var(--space-sm); }
+.day-os-lessons-wrap h3 { margin: 0; }
+.lesson-list { display: grid; gap: 0; border: var(--rule); }
+.lesson-row {
+  display: grid;
+  grid-template-columns: 3.2rem 1fr auto auto;
+  gap: var(--space-sm);
+  align-items: center;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: var(--rule);
+  background: var(--surface-container-low);
+}
+.lesson-row:last-child { border-bottom: 0; }
+.lesson-row.is-done { background: var(--positive-container); }
+.lesson-num, .lesson-state {
+  font-family: var(--font-label);
+  font-size: var(--label-size);
+  color: var(--on-surface-variant);
+}
+.lesson-state { text-transform: uppercase; }
+.lesson-row.is-done .lesson-state { color: var(--positive); font-weight: 600; }
+.lesson-row a { color: var(--primary); }
+@media (max-width: 720px) {
+  .lesson-row { grid-template-columns: 3.2rem 1fr; }
+  .lesson-state, .lesson-row a:last-child { grid-column: 2; }
+}

@@ -1,0 +1,17 @@
+# Helix Solutions — master website
+# Local tooling / dependencies (never committed)
+node_modules/
+.hallmark/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+
+# Root-level duplicate demo videos — byte-identical copies live in
+# helix-solutions/assets/ and are the ones the site actually references.
+/Shadow-Mode_Pilot_Partner.mp4
+/الذكاء_الاصطناعي_المنضبط.mp4
+
+# OS cruft
+.DS_Store
+Thumbs.db
