@@ -43,13 +43,19 @@ No dependencies. `node_modules/` (Puppeteer, used only for offline screenshot to
 
 ## Films
 
+<!--HOSTPROBE-->
+<video src="https://media.githubusercontent.com/media/Hatemshalaby15071979/Helix-Solutions/main/helix-solutions/assets/Shadow-Mode_Pilot_Partner.mp4" controls width="320"></video>
+<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/blob/main/helix-solutions/assets/Shadow-Mode_Pilot_Partner.mp4?raw=true" controls width="320"></video>
+<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/shadow-preview.mp4" controls width="320"></video>
+<!--/HOSTPROBE-->
+
 Two short films from the founder — playable right here on GitHub. Use the controls to play, pause and seek. If your browser or network blocks inline playback, use the direct links below each player.
 
 **Shadow-Mode Pilot Partner (English)**
 
-<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/shadow-preview.mp4" controls width="640"></video>
+<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4" controls width="640"></video>
 
-[Download / open the English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/shadow-preview.mp4)
+[Download / open the English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4)
 
 **الذكاء الاصطناعي المنضبط (Arabic)**
 
