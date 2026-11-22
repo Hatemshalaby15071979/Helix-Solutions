@@ -43,25 +43,21 @@ No dependencies. `node_modules/` (Puppeteer, used only for offline screenshot to
 
 ## Films
 
-<!--DIVPROBE-->
-<div><video controls src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/shadow-preview.mp4" muted="false"></video></div>
-<!--/DIVPROBE-->
-
-Two short films from the founder — playable right here on GitHub. Use the controls to play, pause and seek. If your browser or network blocks inline playback, use the direct links below each player.
+Two short films from the founder. The previews below play automatically and loop; click a preview (or its link) to watch the full film with sound.
 
 **Shadow-Mode Pilot Partner (English)**
 
-<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4" controls width="640"></video>
+[![Shadow-Mode Pilot Partner — preview](assets/films/shadow-mode-preview.gif)](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4)
 
-[Download / open the English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4)
+▶ [Watch the full English film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/Shadow-Mode_Pilot_Partner.mp4) · also in [`helix-solutions/assets/`](helix-solutions/assets/Shadow-Mode_Pilot_Partner.mp4)
 
 **الذكاء الاصطناعي المنضبط (Arabic)**
 
-<video src="https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/arabic-film.mp4" controls width="640"></video>
+[![الذكاء الاصطناعي المنضبط — معاينة](assets/films/arabic-preview.gif)](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/arabic-film.mp4)
 
-[Download / open the Arabic film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/arabic-film.mp4)
+▶ [Watch the full Arabic film ↗](https://github.com/Hatemshalaby15071979/Helix-Solutions/releases/download/films-v1/arabic-film.mp4) · also in [`helix-solutions/assets/`](helix-solutions/assets/%D8%A7%D9%84%D8%B0%D9%83%D8%A7%D8%A1_%D8%A7%D9%84%D8%A7%D8%B5%D8%B7%D9%86%D8%A7%D8%B9%D9%8A_%D8%A7%D9%84%D9%85%D9%86%D8%B6%D8%A8%D8%B7.mp4)
 
-> Notes: the players reference the committed MP4 files via GitHub's `raw` URLs (the same method GitHub uses for inline video). The files live in [`helix-solutions/assets/`](helix-solutions/assets/) and are also what the [company site](helix-solutions/index.html) uses. For the largest-screen, full-fidelity viewing with posters and Arabic layout, open the [company site](https://hatemshalaby15071979.github.io/Helix-Solutions/helix-solutions/).
+> Why previews and not an inline player? GitHub's README sanitizer removes `<video>` tags from every external host (raw files, release assets, GitHub Pages), so a native player cannot be embedded directly in a README. The looping GIF previews above render inline, and the full films play from the release assets or the [company site](https://hatemshalaby15071979.github.io/Helix-Solutions/helix-solutions/), which has the real players with posters and Arabic layout.
 
 ---
 
