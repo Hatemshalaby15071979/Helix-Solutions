@@ -41,7 +41,7 @@ Sensitive: <any remote writes, secrets, or destructive actions, or "none">
 ### Current status block (keep updated at the top of the ledger)
 
 ```
-Working — Helix-Solutions is the live master website. The canonical logo at assets/helix-solutions-logo.png is served via raw.githubusercontent.com and used by every portfolio repo. The root index.html mirrors the Helix-Codex landing page; helix-solutions/index.html is the company profile. CI validates HTML structure and brand presence; Pages deploys on push to main.
+Working — Helix-Solutions is the live master website. The canonical logo at assets/helix-solutions-logo.png is served via raw.githubusercontent.com and used by every portfolio repo. The root index.html mirrors the Helix-Codex landing page; helix-solutions/index.html is the company profile. CI validates HTML structure and brand presence, and enforces the GOVERNANCE.md section 2 root-document rule in both directions; Pages deploys on push to main.
 ```
 
 ## 3. Environment facts
@@ -95,3 +95,32 @@ Working — Helix-Solutions is the live master website. The canonical logo at as
   2026-11-26 pass could archive reports while the root set still looked satisfied.
 - **Sensitive/network actions:** `git push origin main`; no force push, no PR or issue
   writes, no secrets.
+
+### 🟢 SIGN-OUT — sami (Claude) — 2026-11-27
+
+STATUS: SIGN-OUT (landing complete)
+
+- Mirrored Assay's root-document assertion (approved by the owner 2026-11-27) into this
+  repository as `.github/scripts/check_root_docs.py`, byte-identical to the copy landed in
+  Assay, createlee, Helix-Codex and Helix-Matrix.
+- The gate asserts GOVERNANCE.md section 2 in both directions: every root document the
+  table names exists, and no unlisted `.md`/`.txt` sits at the root. The allowed set is
+  parsed out of GOVERNANCE.md, so the policy stays the single source of truth;
+  `requirements*.txt`/`constraints*.txt` are treated as package manifests, not documents.
+- It found two real gaps, both now closed: the section 2 table lists `CHANGELOG.md` and
+  `SECURITY.md`, and neither existed. `CHANGELOG.md` is written from the actual history
+  with commit references. `SECURITY.md` states the posture, a threat model, the
+  `cockpit/` shell's same-origin behaviour, and the honest non-goals — including that this
+  repository's workflow actions are tag-pinned (`@v4`, `@v5`), not SHA-pinned.
+- CI gained a "Root-document hygiene (GOVERNANCE.md section 2)" step that runs the gate
+  and then its self-test.
+- Verification: `python3 .github/scripts/validate_site.py` → 13 pages checked, 13 branded,
+  "OK: all checks passed". `python3 .github/scripts/check_root_docs.py` → "OK —
+  Helix-Solutions/ holds only the GOVERNANCE.md section 2 set" (7 table rows, 7 allowed
+  root documents). `--self-test` → "7/7 cases behaved". A planted `STRAY-NOTE.md` and a
+  planted `NOTES.txt` were confirmed to stop the gate on a scratch copy before landing.
+- Committed and pushed to origin/main (three commits: sign-in, the change, this sign-out).
+- Left undone: `cockpit/` is not listed in the GOVERNANCE.md section 1 repository map,
+  though it is published from this tree. That is a section-1 documentation gap, not a
+  section-2 root violation, so it was left for a landing that owns the repo map.
+- Sensitive: plain `git push origin main` (owner's instruction in chat, 2026-11-27).
