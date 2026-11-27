@@ -78,3 +78,20 @@ Working — Helix-Solutions is the live master website. The canonical logo at as
 - index.html false claims corrected (83 failures → 2,107 passed; CI not run → CI green).
 - Stray root docs archived to docs/archive/.
 - Committed and pushed to origin/main.
+
+### 🟢 SIGN-IN — sami (Claude) — 2026-11-27T04:50:00+02:00
+
+- **Mission:** mirror the root-document assertion the owner approved in Assay on
+  2026-11-27 (`scripts/check-scaffold.py`) into this repository: add
+  `.github/scripts/check_root_docs.py` and wire it into CI, then fix what it finds.
+- **Authorization:** owner's instruction in chat, 2026-11-27 ("mirror the assertion
+  across the portfolio").
+- **Files planned:** `.github/scripts/check_root_docs.py` (new); `CHANGELOG.md` (new —
+  the GOVERNANCE.md section 2 table lists it and no such file exists); `SECURITY.md`
+  (new — same reason); `.github/workflows/ci.yml` (new step); `AGENTS.md` (this entry,
+  the sign-out, and the current-status block).
+- **Why:** section 2 says "No stray `.md`/`.txt` at the root", but nothing asserted the
+  *absence* direction — only that the known documents were present. That is how the
+  2026-11-26 pass could archive reports while the root set still looked satisfied.
+- **Sensitive/network actions:** `git push origin main`; no force push, no PR or issue
+  writes, no secrets.
