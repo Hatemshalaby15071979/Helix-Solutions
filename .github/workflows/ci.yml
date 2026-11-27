@@ -21,3 +21,13 @@ jobs:
 
       - name: Validate site structure and brand
         run: python3 .github/scripts/validate_site.py
+
+      # GOVERNANCE.md section 2, asserted in both directions: every root document the
+      # table names is present, and no unlisted .md/.txt sits at the root. A one-way
+      # check cannot enforce a "nothing else at the root" rule — that is how the
+      # 2026-11-26 pass could archive reports while the root set still looked
+      # satisfied. The self-test proves the gate fails closed.
+      - name: Root-document hygiene (GOVERNANCE.md section 2)
+        run: |
+          python3 .github/scripts/check_root_docs.py
+          python3 .github/scripts/check_root_docs.py --self-test
