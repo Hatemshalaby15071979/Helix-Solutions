@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/licence-MIT-6cf" alt="MIT licence">
 </p>
 
-**The operations core, built to be owned.** Helix Solutions is the company and founder profile behind [Helix Codex](https://github.com/Hatemshalaby15071979/Helix-Codex) — governed operations software that runs on your hardware. Founded by [Hatem Shalaby](https://github.com/Hatemshalaby15071979), Contact Centre Operations and AI Implementation Lead focused on WFM and CX transformation.
+**The operations core, built to be owned.** Helix Solutions is the independent developer profile behind [Helix Codex](https://github.com/Hatemshalaby15071979/Helix-Codex) — governed operations software that runs on your hardware. Built by [Hatem Shalaby](https://github.com/Hatemshalaby15071979), an independent developer with a contact-centre operations and AI-implementation background, focused on WFM and CX transformation. No company, no team, no client: one owner, one public portfolio.
 
 > Code is open. Data stays with you. A human is always in charge.
 
@@ -24,7 +24,7 @@ This repository is the **master website** — the single front door for the foun
 | Page | What it is |
 |---|---|
 | [`index.html`](index.html) | Root landing — the Helix Prime operations core |
-| [`helix-solutions/index.html`](helix-solutions/index.html) | Company + founder profile and the full public index (the main site) |
+| [`helix-solutions/index.html`](helix-solutions/index.html) | Independent developer + founder profile and the full public index (the main site) |
 | [`Operations___AI_Glossary_Reference_Matrix.html`](Operations___AI_Glossary_Reference_Matrix.html) | Interactive glossary linking floor symptoms, tools, domains, gates, evidence and topology |
 | `index (2–9).html` | Archived page variants and project deep-dives |
 | [`helix-codex-deck/`](helix-codex-deck/) | Presentation sources (PDF/PPTX) |
@@ -63,7 +63,7 @@ Two short films from the founder. The previews below play automatically and loop
 
 ## The portfolio
 
-Everything is connected and synchronised under one canonical Helix Solutions mark. Thirteen public product repositories, plus this company site.
+Everything is connected and synchronised under one canonical Helix Solutions mark. Fifteen public repositories, plus this site.
 
 | Repository | What it does |
 |---|---|
@@ -73,12 +73,14 @@ Everything is connected and synchronised under one canonical Helix Solutions mar
 | [SigmaHelix-OS](https://github.com/Hatemshalaby15071979/SigmaHelix-OS) | A personal operating system on your own machine — tasks, notes, projects and calendar |
 | [Sign-off](https://github.com/Hatemshalaby15071979/Sign-off) | Signed, offline evidence packs answering how AI touched a customer's records |
 | [CompliProof](https://github.com/Hatemshalaby15071979/CompliProof) | Reconciles two CSV exports by key into an HTML/PDF/CSV evidence pack |
-| [createlee](https://github.com/Hatemshalaby15071979/createlee) | Synthetic Signoff-shaped fixtures to rehearse the evidence gate before client data |
+| [createlee](https://github.com/Hatemshalaby15071979/createlee) | Synthetic Sign-off-shaped fixtures to rehearse the evidence gate before client data |
 | [Study-Studio](https://github.com/Hatemshalaby15071979/Study-Studio) | Private local-first AI tutor: lessons, quizzes, glossaries and bilingual podcasts |
 | [Helix-Education](https://github.com/Hatemshalaby15071979/Helix-Education) | Event-sourced learning engine with a replayable, sealed learner record |
 | [L-D-Command-Center](https://github.com/Hatemshalaby15071979/L-D-Command-Center) | Desktop learning and career workstation that runs on your laptop |
 | [live-support-assistant](https://github.com/Hatemshalaby15071979/live-support-assistant) | Explainable local RAG prototype that escalates instead of guessing |
 | [work-samples](https://github.com/Hatemshalaby15071979/work-samples) | Three self-contained exercises demonstrating the operations-to-software mapping |
+| [n8n-production-starter](https://github.com/Hatemshalaby15071979/n8n-production-starter) | Hardened self-hosted n8n + PostgreSQL + optional local model; backups proven by restore |
+| [Helix-Matrix](https://github.com/Hatemshalaby15071979/Helix-Matrix) | Standalone day-OS reference matrix mapping floor symptoms to governed systems |
 | [Hatemshalaby15071979](https://github.com/Hatemshalaby15071979/Hatemshalaby15071979) | Profile and portfolio front door — founder history and the public index |
 
 The README snapshots of every repository are rendered to PDF and kept in sync in [Repos_Readmes](https://github.com/Hatemshalaby15071979) (local hub).

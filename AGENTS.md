@@ -124,3 +124,27 @@ STATUS: SIGN-OUT (landing complete)
   though it is published from this tree. That is a section-1 documentation gap, not a
   section-2 root violation, so it was left for a landing that owns the repo map.
 - Sensitive: plain `git push origin main` (owner's instruction in chat, 2026-11-27).
+
+## [2026-11-27 06:57 EET] — sami (OpenMausBot), owner-authorised resume/portfolio consistency pass
+STATUS: SIGN-IN
+
+Task: Owner instruction (2026-11-27 audit note): replace the "company / Founded by" framing with
+the verified independent-developer framing (no company, no team, no client, one owner) across
+the README and the two published pages; align the glossary TikTok-pilot line with the resume
+("one-month live pilot with one colleague — not formally measured, so no quantitative impact
+is claimed"); standardise Signoff→Sign-off; add the two missing public repositories
+(n8n-production-starter, Helix-Matrix) to the portfolio table and update the count 13→15.
+
+Touched (planned): `README.md`; `index.html`; `helix-solutions/index.html`;
+`Operations___AI_Glossary_Reference_Matrix.html`; `AGENTS.md` (this entry and the sign-out).
+No code, no build, no route changes.
+
+Why: The owner is applying for a role; the resume says independent developer, so the public
+site must not say "the company". Every changed line now matches a verifiable repository fact
+or the owner's own statement.
+
+Note: the page edits ran at 06:57–07:02 EET and this sign-in was appended at 07:55 EET,
+after an interrupted session; the entry is back-filled, not a pre-write sign-in.
+
+Sensitive: plain `git push origin main` (owner's instruction in chat, 2026-11-27). No force
+push, no history rewrite, no secrets.
