@@ -148,3 +148,25 @@ after an interrupted session; the entry is back-filled, not a pre-write sign-in.
 
 Sensitive: plain `git push origin main` (owner's instruction in chat, 2026-11-27). No force
 push, no history rewrite, no secrets.
+
+## [2026-11-27 08:01 EET] — sami (OpenMausBot), owner-authorised resume/portfolio consistency pass
+STATUS: SIGN-OUT (landing complete)
+
+Task: Same as the 06:57 sign-in. Done: the company framing is gone from the README and both
+published pages; the glossary pilot line now matches the resume; Signoff→Sign-off; the two
+missing public repos are in the table and the count is 15 (matching the profile badge).
+
+Touched: `README.md`; `index.html`; `helix-solutions/index.html`;
+`Operations___AI_Glossary_Reference_Matrix.html`; `AGENTS.md` (sign-in back-fill and this
+sign-out). No code, no build, no route changes, no root document added or removed.
+
+Verification: `git push origin main` landed as `0f218e3`; the root-document gate and page
+builds run in CI on that push. The "15 repositories" count matches the profile table
+(13 previous rows + n8n-production-starter + Helix-Matrix) and the profile's badge.
+
+Left undone: nothing failing. The section-1 repo-map gap noted at the last sign-out
+(`cockpit/` not listed in GOVERNANCE.md section 1) is still that landing's job, not this
+one's.
+
+Sensitive: plain `git push origin main` (owner's instruction in chat, 2026-11-27). No force
+push, no history rewrite, no secrets.
